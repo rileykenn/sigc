@@ -69,6 +69,8 @@ export default function EventsCalendar() {
 
   return (
     <section id="calendar" className="relative py-24 sm:py-32 bg-white overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-fairway-50/80 to-transparent rounded-full -translate-y-1/2 translate-x-1/3" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header */}
@@ -79,13 +81,13 @@ export default function EventsCalendar() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-gold-500 uppercase tracking-[0.2em] text-sm font-medium mb-4">
+          <span className="inline-block rounded-full bg-fairway-100 px-4 py-1.5 text-sm font-semibold text-fairway-700 mb-4">
             2026 Programme
-          </p>
-          <h2 className="font-serif italic text-4xl sm:text-5xl text-green-900">
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight">
             Events Calendar
           </h2>
-          <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
             Browse upcoming competitions and social events
           </p>
         </motion.div>
@@ -116,16 +118,16 @@ export default function EventsCalendar() {
           <div className="flex items-center justify-between mb-6">
             <button
               onClick={prevMonth}
-              className="p-2.5 rounded-xl hover:bg-green-50 text-green-700 transition-colors"
+              className="p-2.5 rounded-xl hover:bg-fairway-50 text-fairway-700 transition-colors"
             >
               <ChevronLeft size={20} />
             </button>
-            <h3 className="text-xl font-serif text-green-900">
+            <h3 className="text-xl font-bold text-fairway-900">
               {MONTHS[currentMonth]} {currentYear}
             </h3>
             <button
               onClick={nextMonth}
-              className="p-2.5 rounded-xl hover:bg-green-50 text-green-700 transition-colors"
+              className="p-2.5 rounded-xl hover:bg-fairway-50 text-fairway-700 transition-colors"
             >
               <ChevronRight size={20} />
             </button>
@@ -163,10 +165,10 @@ export default function EventsCalendar() {
                     }}
                     className={`relative min-h-[80px] sm:min-h-[100px] border-b border-r border-gray-50 p-1.5 sm:p-2 text-left transition-colors ${
                       hasEvents ? 'hover:bg-fairway-50/50 cursor-pointer' : 'cursor-default'
-                    } ${isToday(day) ? 'bg-green-50/80' : ''}`}
+                    } ${isToday(day) ? 'bg-fairway-50/80' : ''}`}
                   >
                     <span className={`text-xs sm:text-sm font-medium ${
-                      isToday(day) ? 'text-green-600 font-bold' : 'text-gray-700'
+                      isToday(day) ? 'text-fairway-600 font-bold' : 'text-gray-700'
                     }`}>
                       {day}
                     </span>

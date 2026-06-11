@@ -1,141 +1,184 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import SocialLinks from '@/components/SocialLinks';
 
-const links = [
-  { label: 'The Course', href: '/course' },
-  { label: 'Membership', href: '/membership' },
-  { label: 'Contact', href: '#contact' },
+const navLinks = [
+  { name: 'Course', href: '/course' },
+  { name: 'Rates', href: '/#pricing' },
+  { name: 'Calendar', href: '/#calendar' },
+  { name: 'Membership', href: '/membership' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  // Only homepage has a dark hero — all other pages need solid navbar immediately
-  const isHome = pathname === '/';
-  const isCourse = pathname === '/course';
-  const hasDarkHero = isHome || isCourse;
-  const solid = !hasDarkHero || scrolled;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          solid ? 'bg-white shadow-sm' : 'bg-transparent'
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={`fixed inset-x-0 top-0 z-50 bg-white transition-all duration-500 ${
+          scrolled
+            ? 'py-3 shadow-lg shadow-fairway-900/5 border-b border-fairway-100'
+            : 'py-5'
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between h-20">
-          {/* Wordmark */}
-          <Link href="/" className="font-serif text-lg tracking-wide">
-            <span className={solid ? 'text-green-900' : 'text-white'}>Sussex Inlet</span>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/media/SIGC-logo.jpg"
+              alt="Sussex Inlet Golf Club"
+              width={160}
+              height={40}
+              className={`transition-all duration-500 object-contain ${scrolled ? 'scale-[0.85]' : 'scale-100'}`}
+              priority
+            />
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-10">
-            {links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`text-sm uppercase tracking-[0.15em] font-medium transition-colors ${
-                  solid ? 'text-green-800 hover:text-gold-500' : 'text-white/90 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Book Now CTA */}
-          <div className="hidden md:block">
-            <a
-              href="tel:0244412259"
-              className={`px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] border transition-colors ${
-                solid
-                  ? 'border-green-800 text-green-800 hover:bg-green-800 hover:text-white'
-                  : 'border-white text-white hover:bg-white hover:text-green-900'
-              }`}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link, i) => {
+              const isPage = link.href.startsWith('/') && !link.href.includes('#');
+              const Tag = isPage ? Link : 'a';
+              return (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.08 }}
+                >
+                  <Tag
+                    href={link.href}
+                    className="relative px-3.5 py-2 text-sm font-medium rounded-full transition-all duration-300 text-fairway-800 hover:bg-fairway-50 hover:text-fairway-600"
+                  >
+                    {link.name}
+                  </Tag>
+                </motion.div>
+              );
+            })}
+            <SocialLinks variant="dark" size={16} className="ml-1" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
             >
-              Book Now
-            </a>
+              <Link
+                href="/membership"
+                className="ml-2 btn-shimmer rounded-full bg-fairway-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-fairway-600/25 transition-all hover:bg-fairway-700 hover:shadow-xl hover:shadow-fairway-600/30"
+              >
+                Join the Club
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2"
-            onClick={() => setOpen(!open)}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden p-2 rounded-xl transition-colors text-fairway-800 hover:bg-fairway-50"
             aria-label="Toggle menu"
           >
-            {open ? (
-              <X size={24} className={solid ? 'text-green-900' : 'text-white'} />
-            ) : (
-              <Menu size={24} className={solid ? 'text-green-900' : 'text-white'} />
-            )}
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 z-[60] bg-green-900"
-          >
-            <div className="flex items-center justify-between px-6 h-20">
-              <Link href="/" onClick={() => setOpen(false)} className="font-serif text-lg text-white">
-                Sussex Inlet
-              </Link>
-              <button onClick={() => setOpen(false)} aria-label="Close menu">
-                <X size={24} className="text-white" />
-              </button>
-            </div>
-
-            <div className="flex flex-col items-center justify-center gap-8 pt-20">
-              {links.map((link, i) => (
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 bottom-0 z-50 w-[280px] bg-white shadow-2xl lg:hidden"
+            >
+              <div className="flex items-center justify-between p-6 border-b border-fairway-100">
+                <Image
+                  src="/media/SIGC-logo.jpg"
+                  alt="Sussex Inlet Golf Club"
+                  width={120}
+                  height={30}
+                  className="object-contain"
+                />
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 rounded-xl text-fairway-800 hover:bg-fairway-50"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="flex flex-col p-6 gap-2">
+                {navLinks.map((link, i) => {
+                  const isPage = link.href.startsWith('/') && !link.href.includes('#');
+                  const Tag = isPage ? Link : 'a';
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.08 }}
+                    >
+                      <Tag
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-fairway-800 font-medium rounded-xl hover:bg-fairway-50 transition-colors"
+                      >
+                        {link.name}
+                      </Tag>
+                    </motion.div>
+                  );
+                })}
                 <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.1 }}
+                  transition={{ delay: 0.4 }}
                 >
                   <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="text-2xl text-white font-serif italic tracking-wide hover:text-gold-400 transition-colors"
+                    href="/membership"
+                    onClick={() => setMobileOpen(false)}
+                    className="block mt-4 btn-shimmer rounded-xl bg-fairway-600 px-5 py-3 text-center font-semibold text-white shadow-lg transition-all hover:bg-fairway-700"
                   >
-                    {link.label}
+                    Join the Club
                   </Link>
                 </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <a
-                  href="tel:0244412259"
-                  className="mt-4 px-8 py-3 border border-gold-400 text-gold-400 text-sm uppercase tracking-[0.15em] font-semibold hover:bg-gold-400 hover:text-green-900 transition-colors"
-                >
-                  Book Now
-                </a>
-              </motion.div>
-            </div>
-          </motion.div>
+                <div className="mt-4 pt-4 border-t border-fairway-100">
+                  <SocialLinks variant="dark" size={18} />
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
