@@ -68,7 +68,7 @@ export default function CoursePage() {
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative rounded-2xl overflow-hidden shadow-2xl shadow-fairway-900/10 aspect-[16/10]">
-              <Image src="/media/tee.webp" alt="Sussex Inlet Golf Course" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" priority />
+              <Image src="/images/drone/DJI_0120.webp" alt="Sussex Inlet Golf Course" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-fairway-950/30 to-transparent" />
             </motion.div>
           </div>

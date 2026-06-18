@@ -35,10 +35,10 @@ function ForecastIcon({ type, className }: { type: string; className?: string })
 
 export default function WeatherSection() {
   return (
-    <section className="relative py-12 bg-gradient-to-r from-fairway-800 via-fairway-900 to-fairway-800 overflow-hidden">
+    <section className="relative py-12 bg-gradient-to-r from-navy-800 via-navy-900 to-navy-800 overflow-hidden">
       {/* Texture */}
       <div className="absolute inset-0 grass-texture opacity-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-fairway-900/80 via-transparent to-fairway-900/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy-900/80 via-transparent to-navy-900/80" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
@@ -52,15 +52,15 @@ export default function WeatherSection() {
           <div className="md:col-span-4 flex items-center gap-5">
             <div className="relative">
               <Sun size={48} className="text-gold-400" />
-              <Cloud size={32} className="text-fairway-300 absolute -bottom-1 -right-2" />
+              <Cloud size={32} className="text-navy-300 absolute -bottom-1 -right-2" />
             </div>
             <div>
               <div className="flex items-baseline gap-1">
                 <span className="text-5xl font-extrabold text-white tracking-tight">{weather.temp}°</span>
-                <span className="text-lg text-fairway-300">C</span>
+                <span className="text-lg text-navy-300">C</span>
               </div>
-              <div className="text-sm text-fairway-300 font-medium">{weather.condition}</div>
-              <div className="text-xs text-fairway-400 mt-0.5">Sussex Inlet, NSW</div>
+              <div className="text-sm text-navy-300 font-medium">{weather.condition}</div>
+              <div className="text-xs text-navy-400 mt-0.5">Sussex Inlet, NSW</div>
             </div>
           </div>
 
@@ -75,9 +75,9 @@ export default function WeatherSection() {
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex items-center gap-2">
-                  <Icon size={14} className="text-fairway-400 shrink-0" />
+                  <Icon size={14} className="text-navy-400 shrink-0" />
                   <div>
-                    <div className="text-[10px] text-fairway-500 uppercase tracking-wider">{item.label}</div>
+                    <div className="text-[10px] text-navy-500 uppercase tracking-wider">{item.label}</div>
                     <div className="text-xs font-semibold text-white">{item.value}</div>
                   </div>
                 </div>
@@ -87,20 +87,20 @@ export default function WeatherSection() {
 
           {/* Divider */}
           <div className="hidden md:block md:col-span-1 flex justify-center">
-            <div className="w-px h-16 bg-fairway-700 mx-auto" />
+            <div className="w-px h-16 bg-navy-700 mx-auto" />
           </div>
 
           {/* 5-Day Forecast */}
           <div className="md:col-span-4">
-            <div className="text-[10px] text-fairway-500 uppercase tracking-wider font-semibold mb-3">5-Day Forecast</div>
+            <div className="text-[10px] text-navy-500 uppercase tracking-wider font-semibold mb-3">5-Day Forecast</div>
             <div className="flex justify-between gap-2">
               {forecast.map((day) => (
                 <div key={day.day} className="flex flex-col items-center gap-1.5">
-                  <span className="text-xs font-medium text-fairway-300">{day.day}</span>
+                  <span className="text-xs font-medium text-navy-300">{day.day}</span>
                   <ForecastIcon type={day.icon} className="text-gold-400 w-5 h-5" />
                   <div className="flex items-center gap-1 text-[11px]">
                     <span className="font-semibold text-white">{day.high}°</span>
-                    <span className="text-fairway-500">{day.low}°</span>
+                    <span className="text-navy-500">{day.low}°</span>
                   </div>
                 </div>
               ))}
@@ -110,7 +110,7 @@ export default function WeatherSection() {
 
         {/* Attribution */}
         <div className="mt-4 text-center">
-          <span className="text-[10px] text-fairway-600">
+          <span className="text-[10px] text-navy-600">
             Weather data for display purposes · <Compass size={8} className="inline" /> Perfect conditions for golf
           </span>
         </div>

@@ -9,8 +9,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-fairway-950 text-fairway-300 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-fairway-700 to-transparent" />
+    <footer className="relative bg-navy-950 text-navy-300 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-700 to-transparent" />
       <div className="absolute inset-0 grass-texture opacity-10" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-16">
@@ -24,13 +24,13 @@ export default function Footer() {
             className="md:col-span-1"
           >
             <Image
-              src="/media/SIGC-logo.jpg"
+              src="/images/SIGC-logo.webp"
               alt="Sussex Inlet Golf Club"
               width={160}
               height={40}
               className="object-contain brightness-0 invert mb-4"
             />
-            <p className="text-sm text-fairway-400 leading-relaxed max-w-xs mb-4">
+            <p className="text-sm text-navy-400 leading-relaxed max-w-xs mb-4">
               Where nature meets the fairway. 9 holes of pure Australian bushland golf in Sussex Inlet.
             </p>
             <SocialLinks variant="light" size={18} />
@@ -50,13 +50,13 @@ export default function Footer() {
               {[
                 { name: 'Course Overview', href: '/course' },
                 { name: 'Green Fees', href: '/#pricing' },
-                { name: 'Events Calendar', href: '/#calendar' },
-                { name: 'Gallery', href: '/#gallery' },
+                { name: 'Sponsorship', href: '/sponsorship' },
+                { name: 'Venue Hire', href: '/#venue-hire' },
               ].map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-fairway-400 hover:text-white transition-colors duration-300 w-fit"
+                  className="text-sm text-navy-400 hover:text-white transition-colors duration-300 w-fit"
                 >
                   {link.name}
                 </Link>
@@ -77,14 +77,14 @@ export default function Footer() {
             <div className="flex flex-col gap-2.5">
               {[
                 { name: 'Membership', href: '/membership' },
-                { name: 'Competitions', href: '/#calendar' },
-                { name: 'Reviews', href: '/#reviews' },
+                { name: 'Competitions', href: '/competitions' },
+                { name: 'News & Results', href: '/news' },
                 { name: 'Contact Us', href: '/#contact' },
               ].map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-fairway-400 hover:text-white transition-colors duration-300 w-fit"
+                  className="text-sm text-navy-400 hover:text-white transition-colors duration-300 w-fit"
                 >
                   {link.name}
                 </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Contact
             </h4>
-            <div className="flex flex-col gap-2.5 text-sm text-fairway-400">
+            <div className="flex flex-col gap-2.5 text-sm text-navy-400">
               <a href="tel:+61244412259" className="hover:text-white transition-colors">(02) 4441 2259</a>
               <a href="mailto:sussexgolf@shoalhaven.net.au" className="hover:text-white transition-colors">sussexgolf@shoalhaven.net.au</a>
               <p>7 Golfcourse Way</p>
@@ -112,23 +112,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-14 pt-6 border-t border-fairway-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-fairway-500">
+        <div className="mt-14 pt-6 border-t border-navy-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-navy-500">
             © {year} Sussex Inlet Golf Club Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <p className="text-xs text-fairway-600">
+            <p className="text-xs text-navy-600">
               Designed by{' '}
               <a
                 href="https://rileytechstudio.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-fairway-400 hover:text-white transition-colors underline decoration-fairway-700 underline-offset-4 hover:decoration-white"
+                className="text-navy-400 hover:text-white transition-colors underline decoration-navy-700 underline-offset-4 hover:decoration-white"
               >
                 Riley Tech Studio
               </a>
             </p>
-            <Link href="/login" className="text-xs text-fairway-500 hover:text-white transition-colors">
+            <Link href="/login" className="text-xs text-navy-500 hover:text-white transition-colors">
               Admin Login
             </Link>
           </div>

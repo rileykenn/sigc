@@ -35,12 +35,12 @@ function PricingCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay }}
-      className="relative rounded-2xl bg-white p-1 shadow-xl shadow-fairway-900/5 ring-1 ring-fairway-100 overflow-hidden"
+      className="relative rounded-2xl bg-white p-1 shadow-xl shadow-navy-900/5 ring-1 ring-navy-100 overflow-hidden"
     >
       {/* Header */}
-      <div className="rounded-xl bg-gradient-to-br from-fairway-600 to-fairway-800 p-6 text-white">
+      <div className="rounded-xl bg-gradient-to-br from-navy-600 to-navy-800 p-6 text-white">
         <h3 className="text-2xl font-bold">{data.title}</h3>
-        <p className="mt-1 text-fairway-200 text-sm">{data.subtitle}</p>
+        <p className="mt-1 text-navy-200 text-sm">{data.subtitle}</p>
       </div>
 
       {/* Table */}
@@ -52,7 +52,7 @@ function PricingCard({
                 <th
                   key={i}
                   className={`pb-3 text-xs font-semibold uppercase tracking-wider ${
-                    i === 0 ? 'text-left text-gray-400' : 'text-center text-fairway-700'
+                    i === 0 ? 'text-left text-gray-400' : 'text-center text-navy-700'
                   }`}
                 >
                   {header}
@@ -68,13 +68,13 @@ function PricingCard({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: delay + 0.2 + rowIndex * 0.1 }}
-                className={`border-t border-fairway-50 ${
+                className={`border-t border-navy-50 ${
                   rowIndex === data.rows.length - 1
                     ? 'bg-gradient-to-r from-gold-400/5 to-gold-400/10'
                     : ''
                 }`}
               >
-                <td className="py-4 text-sm font-semibold text-fairway-900">
+                <td className="py-4 text-sm font-semibold text-navy-900">
                   {row.label}
                   {rowIndex === data.rows.length - 1 && (
                     <span className="ml-2 inline-flex items-center rounded-full bg-gold-400/20 px-2 py-0.5 text-[10px] font-bold uppercase text-gold-600">
@@ -103,7 +103,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="relative py-24 sm:py-32 bg-sand-50">
       {/* Subtle Divider */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-fairway-200 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6">
         {/* Section Header */}
@@ -117,7 +117,7 @@ export default function Pricing() {
           <span className="inline-block rounded-full bg-gold-400/20 px-4 py-1.5 text-sm font-semibold text-gold-600 mb-4">
             Rates
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight">
             Affordable for Everyone
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
@@ -140,7 +140,7 @@ export default function Pricing() {
           className="mt-10 text-center text-sm text-gray-400"
         >
           Please ring the Club on{' '}
-          <a href="tel:+61244412259" className="text-fairway-600 font-medium hover:underline underline-offset-4">
+          <a href="tel:+61244412259" className="text-navy-600 font-medium hover:underline underline-offset-4">
             (02) 4441 2259
           </a>{' '}
           to make a booking and check course availability.

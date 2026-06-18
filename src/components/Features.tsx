@@ -1,57 +1,38 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  Flag,
-  Trees,
-  Home,
-  ShoppingBag,
-  Flame,
-  Car,
-} from 'lucide-react';
+import Image from 'next/image';
 
 const features = [
   {
-    icon: Flag,
     title: '9 Hole Course',
-    description: 'Championship rated par course through stunning bushland',
-    accent: 'from-fairway-500 to-fairway-600',
-    iconBg: 'bg-fairway-50 text-fairway-600',
+    image: '/images/golfcourse.webp',
+    description: 'Par 64 course through stunning native Australian bushland',
   },
   {
-    icon: Trees,
     title: 'Native Wildlife',
-    description: 'Wallabies and kangaroos roam freely across the greens',
-    accent: 'from-emerald-500 to-teal-600',
-    iconBg: 'bg-emerald-50 text-emerald-600',
+    image: '/images/wildlife.webp',
+    description: 'Kangaroos and native wildlife roam freely across the course',
   },
   {
-    icon: Home,
     title: 'Clubhouse & Lounge',
-    description: 'Relax after your round with drinks and good company',
-    accent: 'from-amber-500 to-yellow-600',
-    iconBg: 'bg-amber-50 text-amber-600',
+    image: '/images/clubhouse.webp',
+    description: 'Relax with air conditioning, TV, and outdoor seating',
   },
   {
-    icon: ShoppingBag,
     title: 'Pro Shop',
-    description: 'Everything you need for your game, all under one roof',
-    accent: 'from-blue-500 to-indigo-600',
-    iconBg: 'bg-blue-50 text-blue-600',
+    image: '/images/golfshop.webp',
+    description: 'Fully stocked shop with friendly staff to help you out',
   },
   {
-    icon: Flame,
-    title: 'BBQ & Outdoor Area',
-    description: 'Fire up the grill and enjoy the scenic surroundings',
-    accent: 'from-orange-500 to-red-500',
-    iconBg: 'bg-orange-50 text-orange-600',
-  },
-  {
-    icon: Car,
     title: 'Cart & Club Hire',
-    description: 'Motorised carts and clubs available for all visitors',
-    accent: 'from-violet-500 to-purple-600',
-    iconBg: 'bg-violet-50 text-violet-600',
+    image: '/images/goodcarthire.webp',
+    description: 'Buggies, carts and club hire available for all visitors',
+  },
+  {
+    title: 'Practice Nets',
+    image: '/images/practice-nets.webp',
+    description: 'Warm up before your round at our practice facilities',
   },
 ];
 
@@ -86,10 +67,10 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block rounded-full bg-fairway-100 px-4 py-1.5 text-sm font-semibold text-fairway-700 mb-4">
+          <span className="inline-block rounded-full bg-navy-100 px-4 py-1.5 text-sm font-semibold text-navy-700 mb-4">
             Our Course
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight">
             More Than Just Golf
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
@@ -97,7 +78,7 @@ export default function Features() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
+        {/* Image Card Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -105,33 +86,35 @@ export default function Features() {
           viewport={{ once: true, margin: '-50px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div
-                key={feature.title}
-                variants={cardVariants}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="group relative rounded-2xl bg-white p-7 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-fairway-900/5 hover:ring-fairway-200 cursor-default"
-              >
-                {/* Gradient Accent Line */}
-                <div className={`absolute top-0 left-6 right-6 h-[3px] rounded-b-full bg-gradient-to-r ${feature.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+          {features.map((feature) => (
+            <motion.div
+              key={feature.title}
+              variants={cardVariants}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className="group relative rounded-2xl bg-white overflow-hidden shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-navy-900/5 hover:ring-navy-200 cursor-default"
+            >
+              {/* Image */}
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
 
-                {/* Icon */}
-                <div className={`inline-flex rounded-xl ${feature.iconBg} p-3 mb-4 transition-transform duration-300 group-hover:scale-110`}>
-                  <Icon size={24} strokeWidth={1.5} />
-                </div>
-
-                {/* Text */}
-                <h3 className="text-lg font-semibold text-fairway-900 mb-1.5">
+              {/* Text */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-navy-900 mb-1.5">
                   {feature.title}
                 </h3>
                 <p className="text-sm text-gray-500 leading-relaxed">
                   {feature.description}
                 </p>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

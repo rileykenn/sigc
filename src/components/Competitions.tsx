@@ -25,7 +25,7 @@ const competitions = [
     date: 'September',
     description: '3 rounds of stroke play over 3 weekends',
     tag: 'Championship',
-    tagColor: 'bg-fairway-100 text-fairway-700',
+    tagColor: 'bg-navy-100 text-navy-700',
   },
   {
     icon: Calendar,
@@ -62,7 +62,7 @@ const competitions = [
 ];
 
 const regularDays = [
-  { day: 'Sunday', type: 'AGU Competition', color: 'bg-fairway-500' },
+  { day: 'Sunday', type: 'AGU Competition', color: 'bg-navy-500' },
   { day: 'Tuesday', type: 'Veterans', color: 'bg-blue-500' },
   { day: 'Wednesday', type: "Women's Golf", color: 'bg-violet-500' },
 ];
@@ -71,7 +71,7 @@ export default function Competitions() {
   return (
     <section id="competitions" className="relative py-24 sm:py-32 bg-white overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-fairway-50/80 to-transparent rounded-full -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-navy-50/80 to-transparent rounded-full -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-gold-400/5 to-transparent rounded-full translate-y-1/2 -translate-x-1/3" />
 
       <div className="relative mx-auto max-w-7xl px-6">
@@ -83,10 +83,10 @@ export default function Competitions() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block rounded-full bg-fairway-100 px-4 py-1.5 text-sm font-semibold text-fairway-700 mb-4">
+          <span className="inline-block rounded-full bg-navy-100 px-4 py-1.5 text-sm font-semibold text-navy-700 mb-4">
             2026 Programme
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight">
             Competitions & Events
           </h2>
           <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
@@ -127,11 +127,11 @@ export default function Competitions() {
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-lg hover:shadow-fairway-900/5 hover:ring-fairway-200"
+                className="group relative rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-lg hover:shadow-navy-900/5 hover:ring-navy-200"
               >
                 {/* Top Row */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="rounded-xl bg-fairway-50 p-2.5 text-fairway-600 transition-transform group-hover:scale-110 duration-300">
+                  <div className="rounded-xl bg-navy-50 p-2.5 text-navy-600 transition-transform group-hover:scale-110 duration-300">
                     <Icon size={20} strokeWidth={1.5} />
                   </div>
                   <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${comp.tagColor}`}>
@@ -140,7 +140,7 @@ export default function Competitions() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-base font-bold text-fairway-900 mb-1">
+                <h3 className="text-base font-bold text-navy-900 mb-1">
                   {comp.title}
                 </h3>
                 <p className="text-sm text-gray-500 leading-relaxed mb-3">
@@ -148,7 +148,7 @@ export default function Competitions() {
                 </p>
 
                 {/* Date */}
-                <div className="flex items-center gap-1.5 text-xs font-medium text-fairway-600">
+                <div className="flex items-center gap-1.5 text-xs font-medium text-navy-600">
                   <Calendar size={12} />
                   {comp.date}
                 </div>

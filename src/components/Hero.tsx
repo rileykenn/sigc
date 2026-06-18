@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
-import { MapPin, Award, TreePine } from 'lucide-react';
+import { MapPin, TreePine } from 'lucide-react';
 import WeatherWidget from '@/components/WeatherWidget';
 
 export default function Hero() {
@@ -33,7 +33,7 @@ export default function Hero() {
           y: [0, -15, 0],
         }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-fairway-100/60 via-fairway-200/30 to-transparent blur-3xl"
+        className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-navy-100/60 via-navy-200/30 to-transparent blur-3xl"
       />
       {/* Medium orb - bottom left */}
       <motion.div
@@ -51,12 +51,12 @@ export default function Hero() {
           scale: [1, 1.2, 1],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        className="absolute top-1/3 left-1/4 w-[200px] h-[200px] rounded-full bg-fairway-300/10 blur-3xl hidden lg:block"
+        className="absolute top-1/3 left-1/4 w-[200px] h-[200px] rounded-full bg-navy-300/10 blur-3xl hidden lg:block"
       />
 
       {/* ===== TOPOGRAPHIC LINE PATTERN ===== */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 30 50 50 Q75 70 100 50' fill='none' stroke='%2315803d' stroke-width='1'/%3E%3Cpath d='M0 30 Q25 10 50 30 Q75 50 100 30' fill='none' stroke='%2315803d' stroke-width='0.5'/%3E%3Cpath d='M0 70 Q25 50 50 70 Q75 90 100 70' fill='none' stroke='%2315803d' stroke-width='0.5'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 30 50 50 Q75 70 100 50' fill='none' stroke='%231e3a5f' stroke-width='1'/%3E%3Cpath d='M0 30 Q25 10 50 30 Q75 50 100 30' fill='none' stroke='%231e3a5f' stroke-width='0.5'/%3E%3Cpath d='M0 70 Q25 50 50 70 Q75 90 100 70' fill='none' stroke='%231e3a5f' stroke-width='0.5'/%3E%3C/svg%3E")`,
         backgroundSize: '200px 200px',
       }} />
 
@@ -72,10 +72,10 @@ export default function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-fairway-50 border border-fairway-200 px-4 py-2 mb-6"
+            className="inline-flex items-center gap-2 rounded-full bg-navy-50 border border-navy-200 px-4 py-2 mb-6"
           >
-            <MapPin size={14} className="text-fairway-600" />
-            <span className="text-xs font-semibold text-fairway-700 uppercase tracking-wider">
+            <MapPin size={14} className="text-navy-600" />
+            <span className="text-xs font-semibold text-navy-700 uppercase tracking-wider">
               Sussex Inlet, NSW
             </span>
           </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-fairway-950 tracking-[-0.03em] leading-[0.9]"
+              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-navy-950 tracking-[-0.03em] leading-[0.9]"
             >
               Where
             </motion.h1>
@@ -98,7 +98,7 @@ export default function Hero() {
               transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[0.9]"
             >
-              <span className="text-fairway-600">Nature</span>
+              <span className="text-navy-600">Nature</span>
             </motion.h1>
           </div>
           <div className="overflow-hidden">
@@ -106,7 +106,7 @@ export default function Hero() {
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-fairway-950 tracking-[-0.03em] leading-[0.9]"
+              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-navy-950 tracking-[-0.03em] leading-[0.9]"
             >
               Meets the
             </motion.h1>
@@ -118,7 +118,7 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[0.9]"
             >
-              <span className="bg-gradient-to-r from-fairway-600 via-gold-500 to-fairway-500 bg-clip-text text-transparent">
+              <span className="text-navy-800">
                 Fairway.
               </span>
             </motion.h1>
@@ -145,14 +145,14 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="btn-shimmer group inline-flex items-center justify-center gap-2 rounded-full bg-fairway-600 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-fairway-600/20 transition-all hover:bg-fairway-700 hover:shadow-2xl hover:shadow-fairway-600/30 hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-shimmer group inline-flex items-center justify-center gap-2 rounded-full bg-navy-600 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-navy-600/20 transition-all hover:bg-navy-700 hover:shadow-2xl hover:shadow-navy-600/30 hover:scale-[1.02] active:scale-[0.98]"
             >
               Book a Round
               <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
               href="#features"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-fairway-200 px-7 py-3.5 text-base font-semibold text-fairway-800 transition-all hover:border-fairway-400 hover:bg-fairway-50"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy-200 px-7 py-3.5 text-base font-semibold text-navy-800 transition-all hover:border-navy-400 hover:bg-navy-50"
             >
               Explore the Course
             </a>
@@ -169,18 +169,18 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{ y: imageY }}
-              className="absolute top-0 right-0 w-[85%] sm:w-[80%] h-[75%] rounded-3xl overflow-hidden shadow-2xl shadow-fairway-900/15 ring-1 ring-black/5"
+              className="absolute top-0 right-0 w-[85%] sm:w-[80%] h-[75%] rounded-3xl overflow-hidden shadow-2xl shadow-navy-900/15 ring-1 ring-black/5"
             >
               <Image
-                src="/media/tee.webp"
-                alt="Golfer teeing off at Sussex Inlet Golf Club"
+                src="/images/drone/DJI_0120.webp"
+                alt="Aerial view of Sussex Inlet Golf Club course"
                 fill
                 sizes="(max-width: 768px) 85vw, 45vw"
                 className="object-cover"
                 priority
               />
               {/* Gradient overlay on image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-fairway-950/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/20 to-transparent" />
             </motion.div>
 
             {/* Secondary Image — smaller, overlapping bottom-left */}
@@ -189,38 +189,19 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{ y: image2Y }}
-              className="absolute bottom-0 left-0 w-[55%] sm:w-[50%] h-[50%] rounded-2xl overflow-hidden shadow-2xl shadow-fairway-900/20 ring-1 ring-black/5 z-10"
+              className="absolute bottom-0 left-0 w-[55%] sm:w-[50%] h-[50%] rounded-2xl overflow-hidden shadow-2xl shadow-navy-900/20 ring-1 ring-black/5 z-10"
             >
               <Image
-                src="/media/putting.webp"
-                alt="Family playing golf at Sussex Inlet"
+                src="/images/golfplaying.webp"
+                alt="People playing golf at Sussex Inlet"
                 fill
                 sizes="(max-width: 768px) 55vw, 30vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-fairway-950/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/20 to-transparent" />
             </motion.div>
 
             {/* ===== FLOATING STAT CARDS ===== */}
-
-            {/* Course Rating Card — floats near top-left of image composition */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.1, duration: 0.5, type: 'spring', stiffness: 200 }}
-              style={{ y: floatY }}
-              className="absolute top-[8%] left-[-5%] sm:left-[0%] z-20 glass-badge rounded-2xl px-5 py-4 shadow-xl"
-            >
-              <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-gold-400/20 p-2.5">
-                  <Award size={20} className="text-gold-600" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-fairway-900">67</div>
-                  <div className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Course Rating</div>
-                </div>
-              </div>
-            </motion.div>
 
             {/* Wildlife Card — floats bottom-right */}
             <motion.div
@@ -230,11 +211,11 @@ export default function Hero() {
               className="absolute bottom-[15%] right-[-2%] sm:right-[2%] z-20 glass-badge rounded-2xl px-5 py-4 shadow-xl"
             >
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-fairway-100 p-2.5">
-                  <TreePine size={20} className="text-fairway-600" />
+                <div className="rounded-xl bg-navy-100 p-2.5">
+                  <TreePine size={20} className="text-navy-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-fairway-900">Native Bushland</div>
+                  <div className="text-sm font-bold text-navy-900">Native Bushland</div>
                   <div className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Wildlife on Course</div>
                 </div>
               </div>
@@ -245,14 +226,14 @@ export default function Hero() {
               <WeatherWidget />
             </div>
 
-            {/* Decorative accent — green dot grid */}
+            {/* Decorative accent — navy dot grid */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.8 }}
               className="absolute -bottom-12 right-[35%] w-24 h-24 hidden lg:block"
               style={{
-                backgroundImage: 'radial-gradient(circle, #22c55e 1.5px, transparent 1.5px)',
+                backgroundImage: 'radial-gradient(circle, #1e3a5f 1.5px, transparent 1.5px)',
                 backgroundSize: '12px 12px',
                 opacity: 0.2,
               }}
@@ -270,7 +251,7 @@ export default function Hero() {
       </motion.div>
 
       {/* ===== BOTTOM ACCENT LINE ===== */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 h-px bg-gradient-to-r from-transparent via-fairway-200 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
     </section>
   );
 }

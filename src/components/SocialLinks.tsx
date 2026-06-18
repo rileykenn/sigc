@@ -41,8 +41,8 @@ export default function SocialLinks({ variant = 'dark', size = 18, className = '
           aria-label={s.name}
           className={`p-2 rounded-full transition-all duration-300 ${
             variant === 'dark'
-              ? 'text-fairway-800 hover:bg-fairway-50 hover:text-fairway-600'
-              : 'text-fairway-400 hover:text-white hover:bg-fairway-800'
+              ? 'text-navy-800 hover:bg-navy-50 hover:text-navy-600'
+              : 'text-navy-400 hover:text-white hover:bg-navy-800'
           }`}
         >
           <s.Icon size={size} />

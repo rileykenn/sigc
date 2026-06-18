@@ -26,7 +26,7 @@ export default function WeatherWidget() {
           <Cloud size={16} className="text-gray-400 absolute -bottom-1 -right-1" />
         </div>
         <div>
-          <div className="text-2xl font-bold text-fairway-900">{weather.temp}°C</div>
+          <div className="text-2xl font-bold text-navy-900">{weather.temp}°C</div>
           <div className="text-[11px] font-medium text-gray-400">{weather.condition}</div>
         </div>
       </div>

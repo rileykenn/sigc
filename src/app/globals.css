@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
-/* ===== FAIRWAY PREMIUM DESIGN SYSTEM ===== */
+/* ===== NAVY PREMIUM DESIGN SYSTEM ===== */
 
 :root {
-  --fairway-50: #f0fdf4;
-  --fairway-100: #dcfce7;
-  --fairway-200: #bbf7d0;
-  --fairway-300: #86efac;
-  --fairway-400: #4ade80;
-  --fairway-500: #22c55e;
-  --fairway-600: #16a34a;
-  --fairway-700: #15803d;
-  --fairway-800: #166534;
-  --fairway-900: #14532d;
-  --fairway-950: #052e16;
+  --navy-50: #eff6ff;
+  --navy-100: #dbeafe;
+  --navy-200: #bfdbfe;
+  --navy-300: #93c5f8;
+  --navy-400: #60a5e8;
+  --navy-500: #3b82c8;
+  --navy-600: #2563a0;
+  --navy-700: #1e4d78;
+  --navy-800: #1a3a5c;
+  --navy-900: #0f2240;
+  --navy-950: #0a1628;
   --gold-300: #fde047;
   --gold-400: #facc15;
   --gold-500: #eab308;
@@ -24,17 +24,17 @@
 }
 
 @theme inline {
-  --color-fairway-50: var(--fairway-50);
-  --color-fairway-100: var(--fairway-100);
-  --color-fairway-200: var(--fairway-200);
-  --color-fairway-300: var(--fairway-300);
-  --color-fairway-400: var(--fairway-400);
-  --color-fairway-500: var(--fairway-500);
-  --color-fairway-600: var(--fairway-600);
-  --color-fairway-700: var(--fairway-700);
-  --color-fairway-800: var(--fairway-800);
-  --color-fairway-900: var(--fairway-900);
-  --color-fairway-950: var(--fairway-950);
+  --color-navy-50: var(--navy-50);
+  --color-navy-100: var(--navy-100);
+  --color-navy-200: var(--navy-200);
+  --color-navy-300: var(--navy-300);
+  --color-navy-400: var(--navy-400);
+  --color-navy-500: var(--navy-500);
+  --color-navy-600: var(--navy-600);
+  --color-navy-700: var(--navy-700);
+  --color-navy-800: var(--navy-800);
+  --color-navy-900: var(--navy-900);
+  --color-navy-950: var(--navy-950);
   --color-gold-300: var(--gold-300);
   --color-gold-400: var(--gold-400);
   --color-gold-500: var(--gold-500);
@@ -110,21 +110,21 @@ body {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(21, 128, 61, 0.1);
+  border-bottom: 1px solid rgba(30, 77, 120, 0.1);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(21, 128, 61, 0.08);
+  border: 1px solid rgba(30, 77, 120, 0.08);
 }
 
 .glass-badge {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(21, 128, 61, 0.15);
+  border: 1px solid rgba(30, 77, 120, 0.15);
 }
 
 /* ===== SHIMMER BUTTON ===== */
@@ -158,14 +158,14 @@ body {
 /* ===== GRASS TEXTURE PATTERN ===== */
 
 .grass-texture {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322c55e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e4d78' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* ===== DIVIDER PATTERN ===== */
 
-.fairway-divider {
+.navy-divider {
   height: 4px;
-  background: linear-gradient(90deg, transparent, var(--fairway-400), var(--gold-400), var(--fairway-400), transparent);
+  background: linear-gradient(90deg, transparent, var(--navy-400), var(--gold-400), var(--navy-400), transparent);
   border-radius: 2px;
 }
 
@@ -176,21 +176,21 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--fairway-50);
+  background: var(--navy-50);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--fairway-300);
+  background: var(--navy-300);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--fairway-500);
+  background: var(--navy-500);
 }
 
 /* ===== SELECTION HIGHLIGHT ===== */
 
 ::selection {
-  background: var(--fairway-200);
-  color: var(--fairway-900);
+  background: var(--navy-200);
+  color: var(--navy-900);
 }

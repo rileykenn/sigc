@@ -21,7 +21,7 @@ function StarRating({ rating }: { rating: number }) {
 export default function GoogleReviews() {
   return (
     <section id="reviews" className="relative py-24 sm:py-32 bg-sand-50 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-fairway-200 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
@@ -35,7 +35,7 @@ export default function GoogleReviews() {
           <span className="inline-block rounded-full bg-gold-400/20 px-4 py-1.5 text-sm font-semibold text-gold-600 mb-4">
             Reviews
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight">
             What Golfers Say
           </h2>
 
@@ -50,7 +50,7 @@ export default function GoogleReviews() {
                 />
               ))}
             </div>
-            <span className="text-lg font-bold text-fairway-900">{averageRating}</span>
+            <span className="text-lg font-bold text-navy-900">{averageRating}</span>
             <span className="text-sm text-gray-400">·</span>
             <span className="text-sm text-gray-500">{totalReviews} reviews on</span>
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
@@ -72,11 +72,11 @@ export default function GoogleReviews() {
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-lg hover:ring-fairway-200"
+              className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-lg hover:ring-navy-200"
             >
               {/* Avatar + Name */}
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-fairway-100 text-fairway-700 font-bold text-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-navy-100 text-navy-700 font-bold text-sm">
                   {review.avatar}
                 </div>
                 <div>

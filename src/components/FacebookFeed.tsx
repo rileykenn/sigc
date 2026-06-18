@@ -102,7 +102,7 @@ function PostCard({ post, index }: { post: typeof posts[0]; index: number }) {
 export default function FacebookFeed() {
   return (
     <section className="relative py-24 sm:py-32 bg-white">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-fairway-200 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
@@ -117,7 +117,7 @@ export default function FacebookFeed() {
             <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-600 mb-4">
               Social
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-fairway-900 tracking-tight mb-4">
+            <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight mb-4">
               Follow the Action
             </h2>
             <p className="text-lg text-gray-500 leading-relaxed mb-6 max-w-md">
@@ -136,17 +136,17 @@ export default function FacebookFeed() {
             {/* Page Stats */}
             <div className="mt-8 flex items-center gap-6">
               <div>
-                <div className="text-2xl font-bold text-fairway-900">1.2K</div>
+                <div className="text-2xl font-bold text-navy-900">1.2K</div>
                 <div className="text-xs text-gray-400">Followers</div>
               </div>
               <div className="w-px h-8 bg-gray-200" />
               <div>
-                <div className="text-2xl font-bold text-fairway-900">856</div>
+                <div className="text-2xl font-bold text-navy-900">856</div>
                 <div className="text-xs text-gray-400">Likes</div>
               </div>
               <div className="w-px h-8 bg-gray-200" />
               <div>
-                <div className="text-2xl font-bold text-fairway-900">4.8</div>
+                <div className="text-2xl font-bold text-navy-900">4.8</div>
                 <div className="text-xs text-gray-400">Rating</div>
               </div>
             </div>
