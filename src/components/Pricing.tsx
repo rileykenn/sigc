@@ -2,149 +2,117 @@
 
 import { motion } from 'framer-motion';
 
-const greenFees = {
-  title: 'Green Fees',
-  subtitle: 'Play the course',
-  headers: ['', 'Members', 'Visitors', 'Jr. Member', 'Jr. Visitor'],
-  rows: [
-    { label: '9 Holes', values: ['$10', '$29', '$5', '$15'] },
-    { label: '18 Holes', values: ['$10', '$40', '$5', '$15'] },
-  ],
-};
+type Rate = { label: string; price: string };
 
-const cartHire = {
-  title: 'Cart Hire',
-  subtitle: 'Motorised carts available',
-  headers: ['', 'Members', 'Visitors'],
-  rows: [
-    { label: '9 Holes', values: ['$15', '$35'] },
-    { label: '18 Holes', values: ['$24', '$45'] },
-  ],
-};
+const nineHoles: Rate[] = [
+  { label: 'Members', price: '$10' },
+  { label: 'Visitors', price: '$29' },
+  { label: 'Junior members', price: '$5' },
+  { label: 'Junior visitors', price: '$15' },
+];
 
-function PricingCard({
-  data,
-  delay,
-}: {
-  data: typeof greenFees;
-  delay: number;
-}) {
+const eighteenHoles: Rate[] = [
+  { label: 'Members', price: '$10' },
+  { label: 'Visitors', price: '$40' },
+  { label: 'Junior members', price: '$5' },
+  { label: 'Junior visitors', price: '$15' },
+];
+
+const cartHire: { title: string; rates: Rate[] }[] = [
+  {
+    title: '9 holes',
+    rates: [
+      { label: 'Members', price: '$15' },
+      { label: 'Visitors', price: '$35' },
+    ],
+  },
+  {
+    title: '18 holes',
+    rates: [
+      { label: 'Members', price: '$24' },
+      { label: 'Visitors', price: '$45' },
+    ],
+  },
+];
+
+function RateList({ title, rates, delay = 0 }: { title: string; rates: Rate[]; delay?: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay }}
-      className="relative rounded-2xl bg-white p-1 shadow-xl shadow-navy-900/5 ring-1 ring-navy-100 overflow-hidden"
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
-      {/* Header */}
-      <div className="rounded-xl bg-gradient-to-br from-navy-600 to-navy-800 p-6 text-white">
-        <h3 className="text-2xl font-bold">{data.title}</h3>
-        <p className="mt-1 text-navy-200 text-sm">{data.subtitle}</p>
-      </div>
-
-      {/* Table */}
-      <div className="p-5">
-        <table className="w-full">
-          <thead>
-            <tr>
-              {data.headers.map((header, i) => (
-                <th
-                  key={i}
-                  className={`pb-3 text-xs font-semibold uppercase tracking-wider ${
-                    i === 0 ? 'text-left text-gray-400' : 'text-center text-navy-700'
-                  }`}
-                >
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.rows.map((row, rowIndex) => (
-              <motion.tr
-                key={row.label}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: delay + 0.2 + rowIndex * 0.1 }}
-                className={`border-t border-navy-50 ${
-                  rowIndex === data.rows.length - 1
-                    ? 'bg-gradient-to-r from-gold-400/5 to-gold-400/10'
-                    : ''
-                }`}
-              >
-                <td className="py-4 text-sm font-semibold text-navy-900">
-                  {row.label}
-                  {rowIndex === data.rows.length - 1 && (
-                    <span className="ml-2 inline-flex items-center rounded-full bg-gold-400/20 px-2 py-0.5 text-[10px] font-bold uppercase text-gold-600">
-                      Best Value
-                    </span>
-                  )}
-                </td>
-                {row.values.map((value, i) => (
-                  <td
-                    key={i}
-                    className="py-4 text-center text-sm font-medium text-gray-700"
-                  >
-                    {value}
-                  </td>
-                ))}
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h3 className="font-display text-2xl font-semibold text-navy-950">{title}</h3>
+      <ul className="mt-4 border-t border-navy-200/70">
+        {rates.map((rate) => (
+          <li
+            key={rate.label}
+            className="flex items-baseline justify-between gap-4 border-b border-navy-200/70 py-4"
+          >
+            <span className="text-navy-900/70">{rate.label}</span>
+            <span className="font-display text-3xl font-semibold tabular-nums text-navy-950">
+              {rate.price}
+            </span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative py-24 sm:py-32 bg-sand-50">
-      {/* Subtle Divider */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
-
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Section Header */}
+    <section id="pricing" className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-4xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <span className="inline-block rounded-full bg-gold-400/20 px-4 py-1.5 text-sm font-semibold text-gold-600 mb-4">
-            Rates
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-navy-900 tracking-tight">
-            Affordable for Everyone
+          <h2 className="font-display text-4xl font-semibold tracking-tight text-navy-950 [text-wrap:balance] sm:text-5xl lg:text-6xl">
+            Green fees
           </h2>
-          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
-            Members and visitors welcome — great value golf in a stunning setting
+          <p className="mt-4 max-w-[62ch] leading-relaxed text-navy-900/70">
+            Pay at the pro shop on your way to the first tee.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <PricingCard data={greenFees} delay={0} />
-          <PricingCard data={cartHire} delay={0.15} />
+        <div className="mt-12 grid gap-x-16 gap-y-10 sm:mt-16 sm:grid-cols-2">
+          <RateList title="9 holes" rates={nineHoles} />
+          <RateList title="18 holes" rates={eighteenHoles} delay={0.1} />
         </div>
 
-        {/* Call-to-book note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-10 text-center text-sm text-gray-400"
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mt-16 sm:mt-20"
         >
-          Please ring the Club on{' '}
-          <a href="tel:+61244412259" className="text-navy-600 font-medium hover:underline underline-offset-4">
-            (02) 4441 2259
-          </a>{' '}
-          to make a booking and check course availability.
-        </motion.p>
+          <h3 className="font-display text-2xl font-semibold text-navy-950">Cart hire</h3>
+          <div className="mt-6 grid gap-x-16 gap-y-8 sm:grid-cols-2">
+            {cartHire.map((group) => (
+              <div key={group.title}>
+                <h4 className="text-sm font-medium text-navy-700">{group.title}</h4>
+                <ul className="mt-2 border-t border-navy-200/70">
+                  {group.rates.map((rate) => (
+                    <li
+                      key={rate.label}
+                      className="flex items-baseline justify-between gap-4 border-b border-navy-200/70 py-3"
+                    >
+                      <span className="text-sm text-navy-900/70">{rate.label}</span>
+                      <span className="font-display text-2xl font-semibold tabular-nums text-navy-950">
+                        {rate.price}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

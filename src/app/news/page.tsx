@@ -3,54 +3,73 @@
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Newspaper, Users, Heart } from 'lucide-react';
 
 const sections = [
-  { id: 'members', title: 'Members News & Results', icon: Users, description: 'Club competition results, member announcements, and general club news.' },
-  { id: 'ladies', title: 'Ladies News & Results', icon: Heart, description: 'Wednesday competition results, ladies events, and upcoming fixtures.' },
-  { id: 'vets', title: 'Veterans News & Results', icon: Newspaper, description: 'Tuesday veterans competition results and upcoming events.' },
+  { id: 'members', title: 'Members', description: 'Club competition results, member announcements and general club news.' },
+  { id: 'ladies', title: 'Ladies', description: 'Wednesday competition results, ladies events and upcoming fixtures.' },
+  { id: 'vets', title: 'Veterans', description: 'Tuesday veterans competition results and upcoming events.' },
 ];
 
 export default function NewsPage() {
   return (
     <main>
       <Navbar />
-      <section className="pt-32 pb-16 bg-navy-950">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight mb-4">
-            News & Results
+      <section className="bg-navy-950 pt-32 pb-16 sm:pt-36 sm:pb-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="font-display text-4xl font-semibold tracking-tight text-sand-50 sm:text-5xl lg:text-6xl [text-wrap:balance]"
+          >
+            News and results
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-xl text-navy-200">
-            Stay up to date with the latest from Sussex Inlet Golf Club
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6, ease: 'easeOut' }}
+            className="mt-5 max-w-[62ch] leading-relaxed text-sand-50/80"
+          >
+            Competition results and notices from around the club.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-5xl px-6 space-y-16">
-          {sections.map((section, i) => {
-            const Icon = section.icon;
-            return (
-              <motion.div
-                key={section.id}
-                id={section.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="scroll-mt-28"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="rounded-xl bg-navy-100 p-3 text-navy-600"><Icon size={24} /></div>
-                  <h2 className="text-3xl font-bold text-navy-900">{section.title}</h2>
-                </div>
-                <p className="text-gray-500 mb-6">{section.description}</p>
-                <div className="rounded-2xl bg-navy-50 p-8 text-center">
-                  <p className="text-navy-600 font-medium">Check back soon for the latest results and updates.</p>
-                </div>
-              </motion.div>
-            );
-          })}
+      <section className="bg-white py-20 sm:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          {sections.map((section, i) => (
+            <motion.div
+              key={section.id}
+              id={section.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: 'easeOut' }}
+              className="border-t border-sand-200 py-8 scroll-mt-28 first:border-t-0 first:pt-0"
+            >
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-navy-950 sm:text-3xl">{section.title}</h2>
+              <p className="mt-2 max-w-[62ch] leading-relaxed text-navy-900/70">{section.description}</p>
+            </motion.div>
+          ))}
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="mt-12 rounded-2xl border border-sand-200 bg-sand-50 px-6 py-12 text-center"
+          >
+            <p className="font-display text-2xl font-semibold tracking-tight text-navy-950">Nothing posted yet</p>
+            <p className="mx-auto mt-3 max-w-[62ch] leading-relaxed text-navy-900/70">Follow the club on Facebook for day-to-day updates.</p>
+            <a
+              href="https://www.facebook.com/SussexInletGolfClub"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-11 cursor-pointer items-center font-medium text-navy-800 underline decoration-gold-500/60 underline-offset-4 transition hover:decoration-gold-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
+            >
+              Sussex Inlet Golf Club on Facebook
+            </a>
+          </motion.div>
         </div>
       </section>
       <Footer />

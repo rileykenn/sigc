@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code local settings (personal, per-machine)
+.claude/settings.local.json
+
+# large course-map source images (kept locally, not in git).
+# Only the small runtime textures under public/mapmedia are committed:
+# basemap.jpg, basemap-outer.jpg, forest-tile.jpg
+/public/mapmedia/rawmap3.png
+/public/mapmedia/basemap-master.png
+/public/mapmedia/mapwithholeindicators.png
+/public/mapmedia/Rawmapnoindicators.png
+/public/media/Rawmap.jpg

@@ -5,13 +5,15 @@ export type CalendarEvent = {
   description?: string;
 };
 
+// Calendar category colors: muted, harmonised with the navy/gold/sand theme.
+// Color is a secondary cue only; every chip also carries the club's text label.
 export const clubColors: Record<string, { bg: string; text: string; dot: string }> = {
   AGU: { bg: 'bg-fairway-100', text: 'text-fairway-700', dot: 'bg-fairway-500' },
-  Vets: { bg: 'bg-blue-50', text: 'text-blue-700', dot: 'bg-blue-500' },
-  WGA: { bg: 'bg-violet-50', text: 'text-violet-700', dot: 'bg-violet-500' },
-  Gents: { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
-  OHW: { bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-500' },
-  General: { bg: 'bg-gray-100', text: 'text-gray-700', dot: 'bg-gray-400' },
+  Vets: { bg: 'bg-sky-50', text: 'text-sky-800', dot: 'bg-sky-600' },
+  WGA: { bg: 'bg-rose-50', text: 'text-rose-800', dot: 'bg-rose-400' },
+  Gents: { bg: 'bg-navy-50', text: 'text-navy-800', dot: 'bg-navy-600' },
+  OHW: { bg: 'bg-teal-50', text: 'text-teal-800', dot: 'bg-teal-600' },
+  General: { bg: 'bg-sand-100', text: 'text-navy-700', dot: 'bg-navy-300' },
   Sponsor: { bg: 'bg-gold-400/20', text: 'text-gold-600', dot: 'bg-gold-500' },
 };
 

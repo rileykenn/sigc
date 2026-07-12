@@ -1,18 +1,17 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import SocialEvents from '@/components/SocialEvents';
-import Clubhouse from '@/components/Clubhouse';
-import GolfShop from '@/components/GolfShop';
-import PracticeNets from '@/components/PracticeNets';
+import OurStory from '@/components/OurStory';
+import Facilities from '@/components/Facilities';
 import Gallery from '@/components/Gallery';
+import BlueTreeBand from '@/components/BlueTreeBand';
 import Pricing from '@/components/Pricing';
+import SocialEvents from '@/components/SocialEvents';
 import EventsCalendar from '@/components/EventsCalendar';
-import SponsorshipPreview from '@/components/SponsorshipPreview';
-import LiquorNotice from '@/components/LiquorNotice';
 import GoogleReviews from '@/components/GoogleReviews';
-import WeatherSection from '@/components/WeatherSection';
+import SponsorshipPreview from '@/components/SponsorshipPreview';
 import Contact from '@/components/Contact';
+import LiquorNotice from '@/components/LiquorNotice';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -21,18 +20,17 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Features />
-      <SocialEvents />
-      <Clubhouse />
-      <GolfShop />
-      <PracticeNets />
+      <OurStory />
+      <Facilities />
       <Gallery />
+      <BlueTreeBand />
       <Pricing />
+      <SocialEvents />
       <EventsCalendar />
-      <SponsorshipPreview />
-      <LiquorNotice />
       <GoogleReviews />
-      <WeatherSection />
+      <SponsorshipPreview />
       <Contact />
+      <LiquorNotice />
       <Footer />
     </main>
   );

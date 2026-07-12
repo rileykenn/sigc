@@ -6,6 +6,8 @@ export type Review = {
   text: string;
 };
 
+// TODO: these look like placeholder reviews, not real Google reviews.
+// Replace with genuine review excerpts (with reviewer permission) before launch.
 export const averageRating = 4.6;
 export const totalReviews = 89;
 
@@ -15,14 +17,14 @@ export const reviews: Review[] = [
     avatar: 'DM',
     rating: 5,
     date: '3 weeks ago',
-    text: 'Absolutely love this little course. The wildlife is incredible — had kangaroos watching us putt on the 5th. Greens are in great condition and the staff are so welcoming.',
+    text: 'Absolutely love this little course. The wildlife is incredible. Kangaroos watched us putt on the 5th, the greens are in great condition and the staff are welcoming.',
   },
   {
     name: 'Sandra K.',
     avatar: 'SK',
     rating: 5,
     date: '1 month ago',
-    text: 'Hidden gem on the south coast! Perfect for a casual round with mates. The clubhouse is friendly and the green fees are very reasonable. Will definitely be back.',
+    text: 'Perfect for a casual round with mates. The clubhouse is friendly and the green fees are very reasonable. Will definitely be back.',
   },
   {
     name: 'Peter W.',
@@ -36,14 +38,14 @@ export const reviews: Review[] = [
     avatar: 'JT',
     rating: 5,
     date: '2 months ago',
-    text: "Best kept secret in Sussex Inlet! Brought the grandkids for a round and they had a blast spotting the wallabies. Very family friendly atmosphere. Love the Wednesday comps.",
+    text: 'Brought the grandkids for a round and they had a blast spotting the wallabies. Very family friendly atmosphere. Love the Wednesday comps.',
   },
   {
     name: 'Michael B.',
     avatar: 'MB',
     rating: 4,
     date: '2 months ago',
-    text: 'Played here while on holiday at the inlet. Great little course with a few tricky holes. The par 4 10th is a cracker. Cart hire is good value. Friendly club.',
+    text: 'Played here while on holiday at the inlet. Great little course with a few tricky holes. Cart hire is good value.',
   },
   {
     name: 'Helen R.',

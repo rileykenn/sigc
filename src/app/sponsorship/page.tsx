@@ -11,105 +11,103 @@ export default function SponsorshipPage() {
     <main>
       <Navbar />
       {/* Hero */}
-      <section className="relative pt-32 pb-20 bg-navy-950 overflow-hidden">
+      <section className="relative overflow-hidden bg-navy-950 pt-32 pb-20 sm:pt-36">
         <div className="absolute inset-0">
-          <Image src="/images/sponsership.webp" alt="Sponsorship at Sussex Inlet Golf Club" fill className="object-cover opacity-20" />
+          <Image src="/images/sponsership.webp" alt="Sponsor boards beside a fairway at Sussex Inlet Golf Club" fill sizes="100vw" className="object-cover opacity-20" />
         </div>
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight mb-6"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="font-display text-4xl font-semibold tracking-tight text-sand-50 sm:text-5xl lg:text-6xl [text-wrap:balance]"
           >
-            Sponsorship Opportunities
+            Sponsor the club
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-xl text-navy-200 max-w-2xl mx-auto"
+            transition={{ delay: 0.15, duration: 0.6, ease: 'easeOut' }}
+            className="mx-auto mt-5 max-w-[62ch] leading-relaxed text-sand-50/80"
           >
-            Support your local community golf club and get your brand in front of our members and visitors
+            Support a community golf club and put your business in front of members and visitors every week of the year.
           </motion.p>
         </div>
       </section>
 
-      {/* Why Sponsor */}
-      <section className="py-20 bg-white">
+      {/* Why sponsor */}
+      <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <span className="inline-block rounded-full bg-navy-100 px-4 py-1.5 text-sm font-semibold text-navy-700 mb-4">Why Sponsor</span>
-              <h2 className="text-4xl font-bold text-navy-900 tracking-tight mb-6">Make a Real Impact</h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Sussex Inlet Golf Club is a community-focused, volunteer-run club that serves members and visitors throughout the Shoalhaven region. Your sponsorship directly supports the maintenance and improvement of our beautiful bushland course.
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-navy-950 sm:text-4xl [text-wrap:balance]">Where your support goes</h2>
+              <p className="mt-5 mb-8 max-w-[62ch] leading-relaxed text-navy-900/70">
+                Sussex Inlet Golf Club is a not-for-profit community club, run by a volunteer board for members and visitors across the Shoalhaven. Sponsorship goes straight into maintaining and improving the bushland course.
               </p>
-              <div className="space-y-4">
+              <ul className="space-y-4">
                 {[
-                  { icon: Users, text: 'Reach hundreds of members and visitors weekly' },
-                  { icon: Heart, text: 'Support a volunteer-run community club' },
-                  { icon: Megaphone, text: 'Prominent signage and recognition on course' },
+                  { icon: Users, text: 'Reach hundreds of members and visitors each week' },
+                  { icon: Heart, text: 'Back a volunteer-run community club' },
+                  { icon: Megaphone, text: 'Signage and recognition around the course' },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
-                    <div key={item.text} className="flex items-center gap-3">
-                      <div className="rounded-lg bg-navy-50 p-2 text-navy-600"><Icon size={18} /></div>
-                      <span className="text-gray-700 font-medium">{item.text}</span>
-                    </div>
+                    <li key={item.text} className="flex items-start gap-3">
+                      <Icon size={20} strokeWidth={1.5} className="mt-0.5 shrink-0 text-navy-700" />
+                      <span className="leading-relaxed text-navy-900/80">{item.text}</span>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]"
+              transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm shadow-navy-900/5"
             >
-              <Image src="/images/sponsershipsigns2.webp" alt="Sponsor signs on the course" fill className="object-cover" />
+              <Image src="/images/sponsershipsigns2.webp" alt="Sponsor signs lining the course" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Current Sponsors */}
-      <section className="py-20 bg-navy-50">
+      {/* Current sponsors */}
+      <section className="bg-sand-50 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="inline-block rounded-full bg-gold-400/20 px-4 py-1.5 text-sm font-semibold text-gold-600 mb-4">Our Sponsors</span>
-            <h2 className="text-4xl font-bold text-navy-900 tracking-tight mb-4">Thank You to Our Sponsors</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto mb-12">We are grateful for the generous support of our sponsors who help keep the club running</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }}>
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-navy-950 sm:text-4xl [text-wrap:balance]">Thanks to our sponsors</h2>
+            <p className="mx-auto mt-4 mb-12 max-w-[62ch] leading-relaxed text-navy-900/70">Generous local businesses help keep the club running. Their boards line the course.</p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative rounded-2xl overflow-hidden shadow-lg aspect-[16/10]">
-              <Image src="/images/sponsership.webp" alt="Sponsor signage" fill className="object-cover" />
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }} className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-sm shadow-navy-900/5">
+              <Image src="/images/sponsership.webp" alt="Sponsor signage at the club" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="relative rounded-2xl overflow-hidden shadow-lg aspect-[16/10]">
-              <Image src="/images/sponsershipsigns2.webp" alt="Course sponsor boards" fill className="object-cover" />
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }} className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-sm shadow-navy-900/5">
+              <Image src="/images/sponsershipsigns2.webp" alt="Course sponsor boards" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Get Involved */}
-      <section className="py-20 bg-navy-900">
+      {/* Become a sponsor */}
+      <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Become a Sponsor</h2>
-            <p className="text-navy-200 text-lg mb-8">Interested in sponsoring Sussex Inlet Golf Club? We would love to hear from you. Contact us to discuss sponsorship packages and opportunities.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+61244412259" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold-400 px-7 py-3.5 font-semibold text-navy-950 hover:bg-gold-300 transition-all shadow-lg">
-                <Phone size={18} /> (02) 4441 2259
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }}>
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-navy-950 sm:text-4xl [text-wrap:balance]">Become a sponsor</h2>
+            <p className="mx-auto mt-4 mb-8 max-w-[62ch] leading-relaxed text-navy-900/70">Call or email the club to talk through sponsorship packages and what would suit your business.</p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <a href="tel:+61244412259" className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-gold-400 px-7 py-3.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-300 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700">
+                <Phone size={16} strokeWidth={1.5} /> (02) 4441 2259
               </a>
-              <a href="mailto:sussexgolf@shoalhaven.net.au" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy-600 px-7 py-3.5 font-semibold text-white hover:bg-navy-800 transition-all">
-                <Mail size={18} /> Email Us
+              <a href="mailto:sussexgolf@shoalhaven.net.au" className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-navy-200 bg-transparent px-7 py-3.5 text-sm font-semibold text-navy-900 transition hover:border-navy-400 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700">
+                <Mail size={16} strokeWidth={1.5} /> Email the club
               </a>
             </div>
           </motion.div>

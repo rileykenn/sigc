@@ -5,131 +5,120 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SocialLinks from '@/components/SocialLinks';
 
+const pageLinks = [
+  { name: 'Course', href: '/course' },
+  { name: 'Green fees', href: '/#pricing' },
+  { name: 'Membership', href: '/membership' },
+  { name: 'Competitions', href: '/competitions' },
+  { name: 'Sponsorship', href: '/sponsorship' },
+  { name: 'News and results', href: '/news' },
+];
+
+const footerLink =
+  'w-fit text-sm text-sand-50/70 transition-colors duration-300 hover:text-sand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400';
+
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="relative bg-navy-950 text-navy-300 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-700 to-transparent" />
-      <div className="absolute inset-0 grass-texture opacity-10" />
+    <footer className="relative bg-navy-950 overflow-hidden">
+      <div className="absolute inset-0 grass-texture opacity-5" />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
-          {/* Logo & Tagline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-1"
-          >
-            <Image
-              src="/images/SIGC-logo.webp"
-              alt="Sussex Inlet Golf Club"
-              width={160}
-              height={40}
-              className="object-contain brightness-0 invert mb-4"
-            />
-            <p className="text-sm text-navy-400 leading-relaxed max-w-xs mb-4">
-              Where nature meets the fairway. 9 holes of pure Australian bushland golf in Sussex Inlet.
-            </p>
-            <SocialLinks variant="light" size={18} />
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Explore
-            </h4>
-            <div className="flex flex-col gap-2.5">
-              {[
-                { name: 'Course Overview', href: '/course' },
-                { name: 'Green Fees', href: '/#pricing' },
-                { name: 'Sponsorship', href: '/sponsorship' },
-                { name: 'Venue Hire', href: '/#venue-hire' },
-              ].map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-navy-400 hover:text-white transition-colors duration-300 w-fit"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-
+      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {/* Club */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="sm:col-span-2 lg:col-span-1"
           >
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Club
-            </h4>
+            <Image
+              src="/images/SIGC-logo.webp"
+              alt="Sussex Inlet Golf Club"
+              width={150}
+              height={38}
+              className="object-contain brightness-0 invert mb-5"
+            />
+            <p className="text-sm text-sand-50/80 leading-relaxed max-w-xs mb-3">
+              Golf in the bush on the NSW South Coast.
+            </p>
+            <p className="text-sm text-sand-50/70 leading-relaxed">
+              7 Golfcourse Way
+              <br />
+              Sussex Inlet NSW 2540
+            </p>
+          </motion.div>
+
+          {/* Pages */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+          >
+            <h4 className="text-sm font-medium text-sand-50 mb-4">Pages</h4>
             <div className="flex flex-col gap-2.5">
-              {[
-                { name: 'Membership', href: '/membership' },
-                { name: 'Competitions', href: '/competitions' },
-                { name: 'News & Results', href: '/news' },
-                { name: 'Contact Us', href: '/#contact' },
-              ].map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-navy-400 hover:text-white transition-colors duration-300 w-fit"
-                >
+              {pageLinks.map((link) => (
+                <Link key={link.name} href={link.href} className={footerLink}>
                   {link.name}
                 </Link>
               ))}
             </div>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact and hours */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
           >
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Contact
+            <h4 className="text-sm font-medium text-sand-50 mb-4">
+              Contact and hours
             </h4>
-            <div className="flex flex-col gap-2.5 text-sm text-navy-400">
-              <a href="tel:+61244412259" className="hover:text-white transition-colors">(02) 4441 2259</a>
-              <a href="mailto:sussexgolf@shoalhaven.net.au" className="hover:text-white transition-colors">sussexgolf@shoalhaven.net.au</a>
-              <p>7 Golfcourse Way</p>
-              <p>Sussex Inlet NSW 2540</p>
+            <div className="flex flex-col gap-2.5">
+              <a href="tel:+61244412259" className={footerLink}>
+                (02) 4441 2259
+              </a>
+              <a
+                href="mailto:sussexgolf@shoalhaven.net.au"
+                className={footerLink}
+              >
+                sussexgolf@shoalhaven.net.au
+              </a>
+              <p className="text-sm text-sand-50/70">Course and clubhouse open daily</p>
+            </div>
+            <div className="mt-5">
+              <SocialLinks variant="light" size={18} />
             </div>
           </motion.div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-14 pt-6 border-t border-navy-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-navy-500">
-            © {year} Sussex Inlet Golf Club Ltd. All rights reserved.
+        {/* Bottom bar */}
+        <div className="mt-14 pt-6 border-t border-sand-50/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-sand-50/50">
+            © 2026 Sussex Inlet Golf Club. Community owned since 1953.
           </p>
-          <div className="flex items-center gap-6">
-            <p className="text-xs text-navy-600">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <a href="#" className="text-xs text-sand-50/50 hover:text-sand-50 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400">
+              Privacy
+            </a>
+            <p className="text-xs text-sand-50/50">
               Designed by{' '}
               <a
                 href="https://rileytechstudio.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-navy-400 hover:text-white transition-colors underline decoration-navy-700 underline-offset-4 hover:decoration-white"
+                className="text-sand-50/70 underline underline-offset-4 decoration-sand-50/30 transition-colors hover:text-sand-50 hover:decoration-sand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
               >
                 Riley Tech Studio
               </a>
             </p>
-            <Link href="/login" className="text-xs text-navy-500 hover:text-white transition-colors">
-              Admin Login
+            <Link
+              href="/login"
+              className="text-xs text-sand-50/50 hover:text-sand-50 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+            >
+              Admin login
             </Link>
           </div>
         </div>

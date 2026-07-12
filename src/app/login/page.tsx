@@ -5,22 +5,22 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-sand-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-fairway-100">
-          <Lock className="h-6 w-6 text-fairway-700" />
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy-100">
+          <Lock size={24} strokeWidth={1.5} className="text-navy-700" />
         </div>
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-fairway-900">
-          Admin Login
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Sussex Inlet Golf Club Content Management System
+        <h1 className="mt-6 text-center font-display text-3xl font-semibold tracking-tight text-navy-950">
+          Admin login
+        </h1>
+        <p className="mt-2 text-center text-sm text-navy-900/60">
+          Sussex Inlet Golf Club content management
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-xl shadow-fairway-900/5 sm:rounded-2xl sm:px-10 ring-1 ring-gray-100">
+        <div className="bg-white py-8 px-4 shadow-sm shadow-navy-900/5 sm:rounded-2xl sm:px-10 ring-1 ring-navy-100">
           <form className="space-y-6" action="/admin">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-navy-800">
                 Email address
               </label>
               <div className="mt-1">
@@ -31,13 +31,13 @@ export default function LoginPage() {
                   autoComplete="email"
                   required
                   defaultValue="admin@sigolfclub.com.au"
-                  className="block w-full appearance-none rounded-xl border border-gray-200 px-4 py-3 placeholder-gray-400 shadow-sm focus:border-fairway-500 focus:outline-none focus:ring-fairway-500 sm:text-sm transition-colors"
+                  className="block w-full appearance-none rounded-lg border border-navy-200 px-4 py-3 text-navy-950 placeholder-navy-300 shadow-sm focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/30 sm:text-sm transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-navy-800">
                 Password
               </label>
               <div className="mt-1">
@@ -48,7 +48,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   required
                   defaultValue="password"
-                  className="block w-full appearance-none rounded-xl border border-gray-200 px-4 py-3 placeholder-gray-400 shadow-sm focus:border-fairway-500 focus:outline-none focus:ring-fairway-500 sm:text-sm transition-colors"
+                  className="block w-full appearance-none rounded-lg border border-navy-200 px-4 py-3 text-navy-950 placeholder-navy-300 shadow-sm focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/30 sm:text-sm transition-colors"
                 />
               </div>
             </div>
@@ -59,15 +59,18 @@ export default function LoginPage() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-fairway-600 focus:ring-fairway-500"
+                  className="h-4 w-4 rounded border-navy-300 text-navy-700 focus:ring-navy-500"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-navy-900">
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-fairway-600 hover:text-fairway-500 transition-colors">
+                <a
+                  href="#"
+                  className="font-medium text-navy-700 underline underline-offset-4 decoration-gold-500/60 hover:decoration-gold-500 transition-colors"
+                >
                   Forgot your password?
                 </a>
               </div>
@@ -76,18 +79,21 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="group flex w-full justify-center rounded-xl border border-transparent bg-fairway-700 py-3 px-4 text-sm font-medium text-white shadow-sm hover:bg-fairway-800 focus:outline-none focus:ring-2 focus:ring-fairway-500 focus:ring-offset-2 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+                className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gold-400 px-7 py-3.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-300 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
               >
-                Sign in to Dashboard
-                <ArrowRight className="ml-2 h-5 w-5 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                Sign in
+                <ArrowRight size={18} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1" />
               </button>
             </div>
           </form>
-          
+
           <div className="mt-6 text-center">
-             <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">
-               &larr; Back to website
-             </Link>
+            <Link
+              href="/"
+              className="text-sm text-navy-900/60 hover:text-navy-900 transition-colors"
+            >
+              &larr; Back to website
+            </Link>
           </div>
         </div>
       </div>

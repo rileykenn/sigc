@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Instrument_Sans, Cormorant_Garamond } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const outfit = Outfit({
+const instrumentSans = Instrument_Sans({
   variable: "--font-primary",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Sussex Inlet Golf Club | 9 Hole Bushland Course & Venue Hire",
+  title: "Sussex Inlet Golf Club | 9-hole bushland course, NSW South Coast",
   description:
-    "Play 9 holes surrounded by native Australian bushland at Sussex Inlet Golf Club. Social golf events, birthday parties, venue hire, and visitors always welcome. Book today.",
+    "A 9-hole, par 64 course cut through native bushland on the NSW South Coast. Playing since 1953. Open seven days, clubs and carts for hire, visitors welcome.",
   keywords: [
     "Sussex Inlet Golf Club",
     "golf course",
@@ -42,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} antialiased`}>
+      <body className={`${instrumentSans.variable} ${cormorant.variable} antialiased`}>
         {children}
         <Toaster richColors position="bottom-right" />
       </body>

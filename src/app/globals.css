@@ -14,13 +14,23 @@
   --navy-800: #1a3a5c;
   --navy-900: #0f2240;
   --navy-950: #0a1628;
-  --gold-300: #fde047;
-  --gold-400: #facc15;
-  --gold-500: #eab308;
-  --gold-600: #ca8a04;
-  --sand-50: #fafaf9;
-  --sand-100: #f5f5f4;
-  --sand-200: #e7e5e4;
+  --gold-300: #ddc078;
+  --gold-400: #c9a24b;
+  --gold-500: #ab852f;
+  --gold-600: #8a6a22;
+  --sand-50: #faf9f7;
+  --sand-100: #f4f2ed;
+  --sand-200: #e8e4db;
+  --fairway-50: #f3f6f2;
+  --fairway-100: #e4ebe1;
+  --fairway-200: #cad8c5;
+  --fairway-300: #a6bda0;
+  --fairway-400: #7d9c77;
+  --fairway-500: #5d7f58;
+  --fairway-600: #476344;
+  --fairway-700: #3a4f38;
+  --fairway-800: #30402f;
+  --fairway-900: #283427;
 }
 
 @theme inline {
@@ -42,7 +52,18 @@
   --color-sand-50: var(--sand-50);
   --color-sand-100: var(--sand-100);
   --color-sand-200: var(--sand-200);
+  --color-fairway-50: var(--fairway-50);
+  --color-fairway-100: var(--fairway-100);
+  --color-fairway-200: var(--fairway-200);
+  --color-fairway-300: var(--fairway-300);
+  --color-fairway-400: var(--fairway-400);
+  --color-fairway-500: var(--fairway-500);
+  --color-fairway-600: var(--fairway-600);
+  --color-fairway-700: var(--fairway-700);
+  --color-fairway-800: var(--fairway-800);
+  --color-fairway-900: var(--fairway-900);
   --font-sans: var(--font-primary);
+  --font-display: var(--font-heading), Georgia, serif;
 }
 
 @theme {
