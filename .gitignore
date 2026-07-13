@@ -51,3 +51,6 @@ next-env.d.ts
 /public/mapmedia/mapwithholeindicators.png
 /public/mapmedia/Rawmapnoindicators.png
 /public/media/Rawmap.jpg
+# original hole media (the site serves the compressed copies in holemedia/web)
+/public/mapmedia/holemedia/*.mp4
+/public/mapmedia/holemedia/*.png

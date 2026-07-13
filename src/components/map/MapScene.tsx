@@ -45,6 +45,8 @@ type MapSceneProps = {
   // mode) and its saved view, if any
   cameraHole: number | null;
   holeView: HoleView | null;
+  // manual pan/zoom/rotate is reserved for the config editor
+  controlsEnabled: boolean;
 };
 
 const OUTER_SCALE = 1.5;
@@ -458,7 +460,10 @@ function HoleMarkerPin({
       </mesh>
       <Html center position={[0, 0.85, 0]} zIndexRange={[10, 0]}>
         <button
-          onClick={onClick}
+          onClick={(e) => {
+            e.stopPropagation(); // keep flag clicks from triggering the click-away handler
+            onClick();
+          }}
           onPointerEnter={() => setHovered(true)}
           onPointerLeave={() => setHovered(false)}
           aria-label={`Open hole ${hole} details`}
@@ -608,6 +613,7 @@ function CameraRig({
   holeView,
   fov,
   controlsRef,
+  controlsEnabled,
   onReady,
   reducedMotion,
 }: {
@@ -616,6 +622,7 @@ function CameraRig({
   holeView: HoleView | null;
   fov: number;
   controlsRef: React.RefObject<MapControlsImpl | null>;
+  controlsEnabled: boolean;
   onReady?: (api: { getView: () => CameraView }) => void;
   reducedMotion?: boolean;
 }) {
@@ -725,6 +732,7 @@ function CameraRig({
   return (
     <MapControls
       ref={controlsRef}
+      enabled={controlsEnabled}
       target={[HOME_TARGET.x, HOME_TARGET.y, HOME_TARGET.z]}
       enableDamping
       dampingFactor={0.08}
@@ -761,6 +769,7 @@ export default function MapScene({
   lens,
   cameraHole,
   holeView,
+  controlsEnabled,
 }: MapSceneProps) {
   const frozen = !!reducedMotion;
   const controlsRef = useRef<MapControlsImpl | null>(null);
@@ -873,6 +882,7 @@ export default function MapScene({
         holeView={holeView}
         fov={lens.fov}
         controlsRef={controlsRef}
+        controlsEnabled={controlsEnabled}
         onReady={onReady}
         reducedMotion={reducedMotion}
       />

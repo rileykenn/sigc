@@ -60,8 +60,8 @@
     },
     {
       "hole": 9,
-      "u": 0.35,
-      "v": 0.423
+      "u": 0.2761,
+      "v": 0.4113
     }
   ],
   "tees": [
@@ -92,8 +92,8 @@
     },
     {
       "hole": 6,
-      "u": 0.5576,
-      "v": 0.6266
+      "u": 0.6302,
+      "v": 0.5722
     },
     {
       "hole": 7,
@@ -107,8 +107,8 @@
     },
     {
       "hole": 9,
-      "u": 0.2772,
-      "v": 0.4187
+      "u": 0.3498,
+      "v": 0.4388
     }
   ],
   "holeViews": {
@@ -136,7 +136,7 @@
       "animSeconds": 8,
       "lens": {
         "fov": 36,
-        "bokehScale": 3.9,
+        "bokehScale": 1.1,
         "focusRange": 1.4,
         "focusDistance": null
       }
@@ -165,7 +165,7 @@
       "animSeconds": 16.5,
       "lens": {
         "fov": 31,
-        "bokehScale": 2.6,
+        "bokehScale": 1.9,
         "focusRange": 4.5,
         "focusDistance": null
       }
@@ -194,7 +194,7 @@
       "animSeconds": 8,
       "lens": {
         "fov": 31,
-        "bokehScale": 2,
+        "bokehScale": 0.7,
         "focusRange": 0.8,
         "focusDistance": null
       }
@@ -281,7 +281,7 @@
       "animSeconds": 8,
       "lens": {
         "fov": 31,
-        "bokehScale": 5.5,
+        "bokehScale": 1.5,
         "focusRange": 5.6,
         "focusDistance": null
       }
@@ -310,7 +310,7 @@
       "animSeconds": 8,
       "lens": {
         "fov": 31,
-        "bokehScale": 2,
+        "bokehScale": 0.8,
         "focusRange": 4,
         "focusDistance": null
       }
@@ -339,8 +339,37 @@
       "animSeconds": 8,
       "lens": {
         "fov": 31,
-        "bokehScale": 2,
+        "bokehScale": 0.7,
         "focusRange": 4,
+        "focusDistance": null
+      }
+    },
+    "9": {
+      "position": [
+        -2.029,
+        3.184,
+        1.99
+      ],
+      "target": [
+        -3.253,
+        0,
+        -1.177
+      ],
+      "position2": [
+        -2.66,
+        3.287,
+        2.051
+      ],
+      "target2": [
+        -3.364,
+        0,
+        -1.167
+      ],
+      "animSeconds": 8,
+      "lens": {
+        "fov": 31,
+        "bokehScale": 3.5,
+        "focusRange": 10.9,
         "focusDistance": null
       }
     }

@@ -71,7 +71,7 @@ type RawConfig = {
   trees?: Partial<TreeConfig>;
 };
 
-const raw = mapConfig as RawConfig;
+const raw = mapConfig as unknown as RawConfig;
 
 export const holeMarkers: HoleMarker[] = raw.markers;
 

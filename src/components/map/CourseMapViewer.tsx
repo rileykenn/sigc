@@ -1,11 +1,12 @@
 'use client';
 
 import { Suspense, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Canvas } from '@react-three/fiber';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { toast } from 'sonner';
-import { ArrowLeft, X, MapPin, Camera, Save, Settings2, MousePointerClick, Trash2, Play, Square } from 'lucide-react';
+import { ArrowLeft, X, MapPin, Camera, Save, Settings2, MousePointerClick, Trash2, Play, Square, Lock } from 'lucide-react';
 import MapScene, { type CameraView, type EditTarget } from './MapScene';
 import { holes } from '@/data/courseData';
 import {
@@ -27,56 +28,86 @@ function HolePanel({ hole, onClose }: { hole: number; onClose: () => void }) {
   const data = holes.find((h) => h.number === hole);
   if (!data) return null;
 
+  const frame = `/mapmedia/holemedia/web/hole${data.number}poster.jpg`;
+  const video = `/mapmedia/holemedia/web/hole${data.number}.mp4`;
+
   return (
     <motion.aside
       initial={{ x: 420, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 420, opacity: 0 }}
       transition={{ type: 'spring', stiffness: 260, damping: 30 }}
-      className="pointer-events-auto absolute inset-x-3 bottom-3 rounded-2xl bg-white/95 p-6 shadow-xl shadow-navy-950/20 backdrop-blur sm:inset-x-auto sm:right-4 sm:top-4 sm:bottom-4 sm:w-[360px] sm:overflow-y-auto"
+      className="pointer-events-auto absolute inset-x-3 bottom-3 overflow-hidden rounded-2xl bg-white/95 shadow-xl shadow-navy-950/25 backdrop-blur sm:inset-x-auto sm:right-4 sm:top-4 sm:bottom-4 sm:flex sm:w-[380px] sm:flex-col"
       aria-label={`Hole ${data.number} details`}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-navy-700">Hole {data.number}</p>
-          <h2 className="font-display text-4xl font-semibold text-navy-950 tracking-tight">
+      {/* hero: the hole's still frame, an image card of its own */}
+      <div className="relative aspect-video shrink-0 bg-navy-950">
+        <Image
+          src={frame}
+          alt={`Aerial view of hole ${data.number}`}
+          fill
+          sizes="380px"
+          className="object-cover"
+          priority
+        />
+        <span className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-navy-950/25" />
+        <span className="absolute left-4 bottom-3">
+          <span className="block text-[11px] font-semibold uppercase tracking-wide text-gold-300">
+            Hole {data.number}
+          </span>
+          <span className="block font-display text-3xl font-semibold text-white">
             Par {data.par}
-          </h2>
-        </div>
+          </span>
+        </span>
         <button
           onClick={onClose}
           aria-label="Close hole details"
-          className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-navy-700 transition hover:bg-sand-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
+          className="absolute right-3 top-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-navy-950/55 text-white backdrop-blur transition hover:bg-navy-950/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
-          <X size={20} strokeWidth={1.5} />
+          <X size={18} strokeWidth={2} />
         </button>
       </div>
 
-      <dl className="mt-4 grid grid-cols-3 gap-3 border-y border-navy-900/10 py-4 tabular-nums">
-        <div>
-          <dt className="text-xs text-navy-900/50">Men</dt>
-          <dd className="font-display text-2xl font-semibold text-navy-950">{data.metresMen}m</dd>
-        </div>
-        <div>
-          <dt className="text-xs text-navy-900/50">Women</dt>
-          <dd className="font-display text-2xl font-semibold text-navy-950">{data.metresWomen}m</dd>
-        </div>
-        <div>
-          <dt className="text-xs text-navy-900/50">Index</dt>
-          <dd className="font-display text-2xl font-semibold text-navy-950">{data.strokeIndex}</dd>
-        </div>
-      </dl>
+      <div className="p-5 sm:min-h-0 sm:flex-1 sm:overflow-y-auto">
+        <dl className="grid grid-cols-3 gap-3 rounded-xl bg-sand-100 px-4 py-3 tabular-nums">
+          <div>
+            <dt className="text-[11px] text-navy-900/50">Men</dt>
+            <dd className="font-display text-2xl font-semibold text-navy-950">{data.metresMen}m</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] text-navy-900/50">Women</dt>
+            <dd className="font-display text-2xl font-semibold text-navy-950">{data.metresWomen}m</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] text-navy-900/50">Index</dt>
+            <dd className="font-display text-2xl font-semibold text-navy-950">{data.strokeIndex}</dd>
+          </div>
+        </dl>
 
-      <p className="mt-4 text-sm leading-relaxed text-navy-900/70">{data.description}</p>
-      {data.tip && (
-        <p className="mt-3 rounded-lg bg-sand-100 p-3 text-sm leading-relaxed text-navy-800">
-          <span className="font-semibold">Local tip: </span>
-          {data.tip}
-        </p>
-      )}
+        <p className="mt-4 text-sm leading-relaxed text-navy-900/75">{data.description}</p>
+        {data.tip && (
+          <p className="mt-3 rounded-xl border border-gold-400/40 bg-gold-400/10 p-3 text-sm leading-relaxed text-navy-900">
+            <span className="font-semibold">Local tip: </span>
+            {data.tip}
+          </p>
+        )}
 
-      <div className="mt-4 flex aspect-video items-center justify-center rounded-lg border border-dashed border-navy-200 text-xs text-navy-900/40">
-        Hole photos and flyover coming soon
+        {/* the drone flyover: its own separate video card */}
+        <div className="mt-4">
+          <p className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-navy-800">
+            <Play size={12} strokeWidth={2.5} className="fill-navy-800" />
+            Drone flyover
+          </p>
+          <video
+            key={data.number}
+            src={`${video}#t=0.001`}
+            controls
+            loop
+            playsInline
+            preload="metadata"
+            className="aspect-video w-full rounded-xl bg-navy-950 object-cover shadow-md shadow-navy-950/15"
+          />
+        </div>
       </div>
     </motion.aside>
   );
@@ -358,7 +389,12 @@ export default function CourseMapViewer() {
   const [selectedHole, setSelectedHole] = useState<number | null>(null);
   const [editHole, setEditHole] = useState<number | null>(null);
   const [editTarget, setEditTarget] = useState<EditTarget>('flag');
-  const [configOpen, setConfigOpen] = useState(true);
+  const [configOpen, setConfigOpen] = useState(false);
+  const [configUnlocked, setConfigUnlocked] = useState(
+    () => typeof window !== 'undefined' && sessionStorage.getItem('sigc-config-unlocked') === '1'
+  );
+  const [askPassword, setAskPassword] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
   const [previewing, setPreviewing] = useState(false);
   const [draftCamera, setDraftCamera] = useState<CameraView | null>(null);
   const [saving, setSaving] = useState(false);
@@ -479,7 +515,14 @@ export default function CourseMapViewer() {
         </div>
         <button
           onClick={() => {
-            setConfigOpen((v) => !v);
+            if (configOpen) {
+              setConfigOpen(false);
+            } else if (configUnlocked) {
+              setConfigOpen(true);
+            } else {
+              setPasswordInput('');
+              setAskPassword(true);
+            }
             setEditHole(null);
             setPreviewing(false);
           }}
@@ -489,13 +532,20 @@ export default function CourseMapViewer() {
               : 'border-sand-50/30 text-sand-50/90 hover:border-sand-50/60'
           }`}
         >
-          <Settings2 size={14} strokeWidth={2} />
+          {configUnlocked ? <Settings2 size={14} strokeWidth={2} /> : <Lock size={13} strokeWidth={2} />}
           Config
         </button>
       </header>
 
       <div className="relative mx-3 mb-3 min-h-[420px] flex-1 overflow-hidden rounded-2xl sm:mx-4 sm:mb-4">
-        <div className="absolute inset-0 touch-none">
+        <div
+          className="absolute inset-0 touch-none"
+          onClick={() => {
+            // clicking anywhere outside the card (flags stop propagation)
+            // closes it and flies the camera back to the default view
+            if (!configMode && selectedHole !== null) setSelectedHole(null);
+          }}
+        >
           <Canvas camera={{ position: defaultCamera.position, fov: initialLens.fov }} dpr={[1, 2]}>
             <Suspense fallback={null}>
               <MapScene
@@ -524,6 +574,7 @@ export default function CourseMapViewer() {
                 terrain={terrain}
                 trees={trees}
                 lens={contextLens}
+                controlsEnabled={configMode}
                 cameraHole={configMode ? (previewing ? editHole : null) : selectedHole}
                 holeView={
                   configMode
@@ -539,7 +590,7 @@ export default function CourseMapViewer() {
           </Canvas>
         </div>
 
-        <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0 z-20">
           <AnimatePresence>
             {!configMode && selectedHole !== null && (
               <HolePanel key="hole-panel" hole={selectedHole} onClose={() => setSelectedHole(null)} />
@@ -582,9 +633,70 @@ export default function CourseMapViewer() {
 
           {!configMode && selectedHole === null && (
             <p className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-navy-950/60 px-4 py-2 text-xs font-medium text-sand-50/90 backdrop-blur">
-              Drag to pan, scroll or pinch to zoom, tap a numbered flag to visit a hole
+              Tap a numbered flag to fly to a hole
             </p>
           )}
+
+          <AnimatePresence>
+            {askPassword && (
+              <motion.div
+                key="config-lock"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="pointer-events-auto absolute inset-0 z-30 flex items-center justify-center bg-navy-950/60 backdrop-blur-sm"
+                onClick={() => setAskPassword(false)}
+              >
+                <motion.form
+                  initial={{ scale: 0.92, y: 10 }}
+                  animate={{ scale: 1, y: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (passwordInput === 'sigc26') {
+                      setConfigUnlocked(true);
+                      sessionStorage.setItem('sigc-config-unlocked', '1');
+                      setAskPassword(false);
+                      setConfigOpen(true);
+                      toast.success('Config editor unlocked.');
+                    } else {
+                      toast.error('Wrong password.');
+                      setPasswordInput('');
+                    }
+                  }}
+                  className="w-[280px] rounded-2xl bg-white p-5 shadow-xl shadow-navy-950/30"
+                >
+                  <p className="flex items-center gap-2 text-sm font-bold text-navy-950">
+                    <Lock size={15} strokeWidth={2} /> Config editor
+                  </p>
+                  <p className="mt-1 text-xs text-navy-900/60">Enter the password to unlock editing.</p>
+                  <input
+                    type="password"
+                    autoFocus
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    placeholder="Password"
+                    className="mt-3 w-full rounded-lg border border-navy-200 px-3 py-2.5 text-sm text-navy-950 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/30"
+                  />
+                  <div className="mt-3 flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setAskPassword(false)}
+                      className="flex-1 cursor-pointer rounded-full border border-navy-200 px-3 py-2 text-xs font-semibold text-navy-800 transition hover:border-navy-400"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 cursor-pointer rounded-full bg-navy-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-navy-800 active:scale-[0.98]"
+                    >
+                      Unlock
+                    </button>
+                  </div>
+                </motion.form>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
