@@ -426,24 +426,18 @@ function ForestRing({ trees }: { trees: TreeConfig }) {
 
 /* ---------- Hole markers, tees and flight line ---------- */
 
-function HoleMarkerPin({
+// The flag pin sits on the green: purely visual, no number
+function FlagPin({
   hole,
   position,
-  selected,
-  editing,
-  onClick,
+  active,
   registerObject,
 }: {
   hole: number;
   position: [number, number, number];
-  selected: boolean;
-  editing: boolean;
-  onClick: () => void;
+  active: boolean;
   registerObject: (hole: number, obj: THREE.Group | null) => void;
 }) {
-  const [hovered, setHovered] = useState(false);
-  const active = selected || editing;
-
   return (
     <group position={position} ref={(obj) => registerObject(hole, obj)}>
       <mesh position={[0, 0.28, 0]}>
@@ -452,23 +446,62 @@ function HoleMarkerPin({
       </mesh>
       <mesh position={[0.09, 0.48, 0]} rotation={[0, 0, -0.08]}>
         <boxGeometry args={[0.18, 0.11, 0.015]} />
-        <meshStandardMaterial color={active || hovered ? '#ffd23f' : '#ff5f4e'} flatShading />
+        <meshStandardMaterial color={active ? '#ffd23f' : '#ff5f4e'} flatShading />
       </mesh>
       <mesh position={[0, 0.02, 0]}>
         <cylinderGeometry args={[0.09, 0.11, 0.05, 8]} />
         <meshStandardMaterial color="#fdf6e3" flatShading />
       </mesh>
-      <Html center position={[0, 0.85, 0]} zIndexRange={[10, 0]}>
+    </group>
+  );
+}
+
+// The tee site carries the clickable hole number, like real tee signage
+function TeeSite({
+  hole,
+  position,
+  active,
+  editing,
+  onClick,
+  registerObject,
+}: {
+  hole: number;
+  position: [number, number, number];
+  active: boolean;
+  editing: boolean;
+  onClick: () => void;
+  registerObject: (hole: number, obj: THREE.Group | null) => void;
+}) {
+  const highlight = active || editing;
+
+  return (
+    <group position={position} ref={(obj) => registerObject(hole, obj)}>
+      {/* golf ball on a peg, revealed when the hole is open or being edited */}
+      {highlight && (
+        <>
+          <mesh position={[0, 0.09, 0]}>
+            <icosahedronGeometry args={[0.05, 1]} />
+            <meshStandardMaterial color="#ffffff" flatShading />
+          </mesh>
+          <mesh position={[0, 0.03, 0]}>
+            <cylinderGeometry args={[0.012, 0.02, 0.07, 6]} />
+            <meshStandardMaterial color="#ff5f4e" flatShading />
+          </mesh>
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, 0]}>
+            <ringGeometry args={[0.08, 0.11, 24]} />
+            <meshBasicMaterial color="#ffd23f" transparent opacity={0.9} side={THREE.DoubleSide} />
+          </mesh>
+        </>
+      )}
+      <Html center position={[0, 0.5, 0]} zIndexRange={[10, 0]}>
         <button
           onClick={(e) => {
-            e.stopPropagation(); // keep flag clicks from triggering the click-away handler
+            e.stopPropagation(); // keep tee clicks from triggering the click-away handler
             onClick();
           }}
-          onPointerEnter={() => setHovered(true)}
-          onPointerLeave={() => setHovered(false)}
           aria-label={`Open hole ${hole} details`}
           className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-[3px] text-base font-bold shadow-lg shadow-[#1d3557]/20 transition-transform duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-            active
+            highlight
               ? 'scale-110 border-[#ffd23f] bg-white text-[#1d3557]'
               : 'border-white bg-[#ffd23f] text-[#1d3557] hover:scale-110'
           }`}
@@ -477,34 +510,6 @@ function HoleMarkerPin({
           {hole}
         </button>
       </Html>
-    </group>
-  );
-}
-
-function TeeMarker({
-  position,
-  registerObject,
-  onClick,
-}: {
-  position: [number, number, number];
-  registerObject: (obj: THREE.Group | null) => void;
-  onClick?: () => void;
-}) {
-  return (
-    <group position={position} ref={registerObject} onClick={onClick}>
-      {/* golf ball on a peg */}
-      <mesh position={[0, 0.09, 0]}>
-        <icosahedronGeometry args={[0.05, 1]} />
-        <meshStandardMaterial color="#ffffff" flatShading />
-      </mesh>
-      <mesh position={[0, 0.03, 0]}>
-        <cylinderGeometry args={[0.012, 0.02, 0.07, 6]} />
-        <meshStandardMaterial color="#ff5f4e" flatShading />
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, 0]}>
-        <ringGeometry args={[0.08, 0.11, 24]} />
-        <meshBasicMaterial color="#ffd23f" transparent opacity={0.9} side={THREE.DoubleSide} />
-      </mesh>
     </group>
   );
 }
@@ -812,42 +817,48 @@ export default function MapScene({
       </group>
       <Kangaroos frozen={frozen} />
 
+      {/* flags mark the greens (visual only) */}
       {markers.map((m) => (
-        <HoleMarkerPin
+        <FlagPin
           key={m.hole}
           hole={m.hole}
           position={markerToWorld(m)}
-          selected={selectedHole === m.hole}
-          editing={configMode && editHole === m.hole}
-          onClick={() => {
-            if (configMode) {
-              onEditHole(editHole === m.hole ? null : m.hole);
-            } else {
-              onSelectHole(selectedHole === m.hole ? null : m.hole);
-            }
-          }}
+          active={activeHole === m.hole}
           registerObject={(hole, obj) => {
             pinObjects.current[hole] = obj;
           }}
         />
       ))}
 
-      {/* tee + ball flight: only for the hole being viewed or edited */}
+      {/* the clickable hole numbers live at the tees */}
+      {tees.map((t) => (
+        <TeeSite
+          key={t.hole}
+          hole={t.hole}
+          position={markerToWorld(t)}
+          active={!configMode && selectedHole === t.hole}
+          editing={configMode && editHole === t.hole}
+          onClick={() => {
+            if (configMode) {
+              onEditHole(editHole === t.hole ? null : t.hole);
+            } else {
+              onSelectHole(selectedHole === t.hole ? null : t.hole);
+            }
+          }}
+          registerObject={(hole, obj) => {
+            teeObjects.current[hole] = obj;
+          }}
+        />
+      ))}
+
+      {/* ball flight from tee to green while a hole is open or edited */}
       {activeHole !== null && activeMarker && activeTee && (
-        <>
-          <TeeMarker
-            position={markerToWorld(activeTee)}
-            registerObject={(obj) => {
-              teeObjects.current[activeHole] = obj;
-            }}
-          />
-          <FlightLine
-            key={`${activeHole}-${activeTee.u.toFixed(4)}-${activeTee.v.toFixed(4)}-${activeMarker.u.toFixed(4)}-${activeMarker.v.toFixed(4)}`}
-            tee={markerToWorld(activeTee)}
-            flag={markerToWorld(activeMarker)}
-            animate={!configMode && !frozen}
-          />
-        </>
+        <FlightLine
+          key={`${activeHole}-${activeTee.u.toFixed(4)}-${activeTee.v.toFixed(4)}-${activeMarker.u.toFixed(4)}-${activeMarker.v.toFixed(4)}`}
+          tee={markerToWorld(activeTee)}
+          flag={markerToWorld(activeMarker)}
+          animate={!configMode && !frozen}
+        />
       )}
 
       {editObject && (

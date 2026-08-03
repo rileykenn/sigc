@@ -47,7 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Sidebar Header */}
           <div className="h-20 flex items-center justify-between px-6 border-b border-gray-100">
             <Link href="/" className="flex items-center gap-3">
-              <Image src="/images/SIGC-logo.webp" alt="SIGC" width={100} height={30} className="object-contain" />
+              <Image src="/images/SIGC-crest.webp" alt="SIGC" width={40} height={40} className="object-contain" />
               <span className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">CMS</span>
             </Link>
             <button 

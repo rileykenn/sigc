@@ -45,7 +45,7 @@ const navItems: NavItem[] = [
       { name: "Men's info", href: '/competitions#mens' },
     ],
   },
-  { name: 'Venue hire', href: '/#venue-hire' },
+  { name: 'Group bookings', href: '/#venue-hire' },
   { name: 'The blue tree', href: '/historic-blue-tree' },
 ];
 
@@ -288,18 +288,23 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex shrink-0 items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
+            className="flex shrink-0 items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
           >
             <Image
-              src="/images/SIGC-logo.webp"
-              alt="Sussex Inlet Golf Club"
-              width={150}
-              height={38}
+              src="/images/SIGC-crest.webp"
+              alt="Sussex Inlet Golf Club crest"
+              width={54}
+              height={50}
               className={`object-contain transition-all duration-500 ${
                 scrolled ? 'scale-[0.88]' : 'scale-100'
               }`}
               priority
             />
+            <span className="font-display text-[17px] font-semibold leading-[1.05] text-navy-950">
+              Sussex Inlet
+              <br />
+              Golf Club
+            </span>
           </Link>
 
           {/* Desktop Links */}
@@ -357,13 +362,20 @@ export default function Navbar() {
               className="fixed right-0 top-0 bottom-0 z-50 w-[300px] bg-white shadow-2xl shadow-navy-900/10 lg:hidden overflow-y-auto"
             >
               <div className="flex items-center justify-between p-6 border-b border-navy-100">
-                <Image
-                  src="/images/SIGC-logo.webp"
-                  alt="Sussex Inlet Golf Club"
-                  width={120}
-                  height={30}
-                  className="object-contain"
-                />
+                <span className="flex items-center gap-2.5">
+                  <Image
+                    src="/images/SIGC-crest.webp"
+                    alt="Sussex Inlet Golf Club crest"
+                    width={46}
+                    height={43}
+                    className="object-contain"
+                  />
+                  <span className="font-display text-base font-semibold leading-[1.05] text-navy-950">
+                    Sussex Inlet
+                    <br />
+                    Golf Club
+                  </span>
+                </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"

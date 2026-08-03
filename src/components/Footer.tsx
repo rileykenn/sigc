@@ -33,12 +33,15 @@ export default function Footer() {
             className="sm:col-span-2 lg:col-span-1"
           >
             <Image
-              src="/images/SIGC-logo.webp"
-              alt="Sussex Inlet Golf Club"
-              width={150}
-              height={38}
-              className="object-contain brightness-0 invert mb-5"
+              src="/images/SIGC-crest.webp"
+              alt="Sussex Inlet Golf Club crest"
+              width={94}
+              height={88}
+              className="object-contain mb-4"
             />
+            <p className="mb-4 font-display text-xl font-semibold leading-tight text-sand-50">
+              Sussex Inlet Golf Club
+            </p>
             <p className="text-sm text-sand-50/80 leading-relaxed max-w-xs mb-3">
               Golf in the bush on the NSW South Coast.
             </p>

@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Briefcase, PartyPopper, Trophy, Users } from 'lucide-react';
+import { BedDouble, Briefcase, PartyPopper, Trophy } from 'lucide-react';
 
 const eventTypes = [
   {
     icon: Trophy,
     title: 'Social golf',
-    description: 'A relaxed nine with your mates, no experience needed.',
+    description:
+      'A relaxed nine with your mates, no experience needed, or group bookings for all social groups.',
   },
   {
     icon: PartyPopper,
@@ -21,9 +22,9 @@ const eventTypes = [
     description: 'A day out for your team or clients, with catering available.',
   },
   {
-    icon: Users,
-    title: 'Group functions',
-    description: 'Family reunions, social club trips, or a crowd down for the weekend.',
+    icon: BedDouble,
+    title: 'Stay and Play',
+    description: 'Group bookings can be arranged to stay at Laguna Lodge and play a round of golf.',
   },
 ];
 
@@ -41,11 +42,12 @@ export default function SocialEvents() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <h2 className="font-display text-4xl font-semibold tracking-tight text-navy-950 [text-wrap:balance] sm:text-5xl lg:text-6xl">
-                Golf days, birthdays and everything between
+                Group bookings
               </h2>
               <p className="mt-5 max-w-[62ch] leading-relaxed text-navy-900/70">
-                The course and clubhouse are both available for group days. Tell us a date and
-                rough numbers, and we will help with the rest.
+                Golf days, birthdays and everything between: the course and clubhouse are both
+                available for group days. Tell us a date and rough numbers, and we will help with
+                the rest.
               </p>
             </motion.div>
 
