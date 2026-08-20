@@ -33,7 +33,7 @@ const galleryImages = [
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="bg-white py-24 sm:py-32">
+    <section id="gallery" className="bg-sand-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 24 }}

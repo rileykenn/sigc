@@ -20,17 +20,29 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+
+      {/* welcome */}
       <Welcome />
+
+      {/* the course and playing it */}
       <Features />
-      <OurStory />
+      <Pricing />
+
+      {/* around the club */}
       <Facilities />
       <Gallery />
+
+      {/* story and community */}
+      <OurStory />
       <BlueTreeBand />
-      <Pricing />
+      <GoogleReviews />
+
+      {/* get involved */}
       <SocialEvents />
       <EventsCalendar />
-      <GoogleReviews />
       <SponsorshipPreview />
+
+      {/* visit */}
       <Contact />
       <LiquorNotice />
       <Footer />

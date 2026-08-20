@@ -7,14 +7,13 @@ import { ArrowRight } from 'lucide-react';
 
 const stats = [
   { value: '9', label: 'holes' },
-  { value: '64', label: 'par' },
-  { value: '67', label: 'rating' },
+  { value: '7', label: 'days a week' },
   { value: '1953', label: 'est.' },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="bg-white py-24 sm:py-32">
+    <section id="features" className="bg-sand-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Image stack */}
@@ -63,14 +62,14 @@ export default function Features() {
               Nine holes among the <em className="italic text-gold-500">gums</em>
             </h2>
             <p className="mt-6 max-w-[62ch] leading-relaxed text-navy-900/70">
-              Par 64, rated 67. Short enough to walk, honest enough to keep you
-              thinking. The fairways cut through native bushland where kangaroos
-              graze the rough and king parrots watch from the trees. Open seven
-              days, with clubs and carts for hire if you&apos;re travelling light.
+              Short enough to walk, honest enough to keep you thinking. The
+              fairways cut through native bushland where kangaroos graze the
+              rough and king parrots watch from the trees. Open seven days, with
+              clubs and carts for hire if you&apos;re travelling light.
             </p>
 
             {/* Stats row */}
-            <div className="mt-10 grid grid-cols-2 gap-y-8 sm:grid-cols-4">
+            <div className="mt-10 grid grid-cols-3 gap-y-8">
               {stats.map((stat) => (
                 <div key={stat.label} className="border-l border-navy-950/10 pl-4">
                   <div className="font-display text-4xl font-semibold tabular-nums text-navy-950 sm:text-5xl">
@@ -88,7 +87,7 @@ export default function Features() {
                 href="/course"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-navy-200 bg-transparent px-7 py-3.5 text-sm font-semibold text-navy-900 transition hover:border-navy-400 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-700"
               >
-                Explore the course
+                Course guide and scorecard
                 <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
               </Link>
             </div>

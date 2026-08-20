@@ -151,7 +151,7 @@ export default function Hero() {
               <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="#features"
+              href="/map"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy-200 px-7 py-3.5 text-base font-semibold text-navy-800 transition-all hover:border-navy-400 hover:bg-navy-50"
             >
               Explore the Course
