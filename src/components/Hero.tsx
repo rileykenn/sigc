@@ -1,257 +1,140 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
-import { MapPin, TreePine } from 'lucide-react';
-import WeatherWidget from '@/components/WeatherWidget';
+import Link from 'next/link';
+
+const slides = [
+  {
+    src: '/images/drone/DJI_0120.webp',
+    alt: 'A fairway at Sussex Inlet Golf Club from above, bordered by bushland and a pond',
+  },
+  {
+    src: '/images/golfplaying.webp',
+    alt: 'A player at the top of her backswing on the tee',
+  },
+  {
+    src: '/images/wildlife.webp',
+    alt: 'Kangaroos grazing beside the fairway in morning light',
+  },
+  {
+    src: '/images/drone/DJI_0112.webp',
+    alt: 'The clubhouse, carts and practice green from above at golden hour',
+  },
+];
+
+const SLIDE_MS = 6500;
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
+  const reducedMotion = useReducedMotion();
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  // Only the first slide is server-rendered so it stays the sole LCP candidate;
+  // the rest mount after hydration, well before the first advance.
+  const [restMounted, setRestMounted] = useState(false);
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const image2Y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const floatY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  useEffect(() => {
+    setRestMounted(true);
+  }, []);
+
+  const playing = !paused && !reducedMotion;
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, SLIDE_MS);
+    return () => clearInterval(id);
+  }, [playing]);
 
   return (
     <section
-      ref={sectionRef}
       id="hero"
-      className="relative min-h-[100dvh] bg-white overflow-hidden pt-28 sm:pt-32 lg:pt-0 lg:flex lg:items-center"
+      className="relative flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden bg-navy-950 lg:min-h-[calc(100dvh-127px)]"
     >
-      {/* ===== ANIMATED BACKGROUND ELEMENTS ===== */}
-      {/* Large gradient orb - top right */}
-      <motion.div
-        animate={{
-          scale: [1, 1.15, 1],
-          x: [0, 20, 0],
-          y: [0, -15, 0],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-navy-100/60 via-navy-200/30 to-transparent blur-3xl"
-      />
-      {/* Medium orb - bottom left */}
-      <motion.div
-        animate={{
-          scale: [1, 1.1, 1],
-          x: [0, -10, 0],
-          y: [0, 20, 0],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-gold-300/20 via-gold-400/10 to-transparent blur-3xl"
-      />
-      {/* Small accent orb */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        className="absolute top-1/3 left-1/4 w-[200px] h-[200px] rounded-full bg-navy-300/10 blur-3xl hidden lg:block"
-      />
-
-      {/* ===== TOPOGRAPHIC LINE PATTERN ===== */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 30 50 50 Q75 70 100 50' fill='none' stroke='%231e3a5f' stroke-width='1'/%3E%3Cpath d='M0 30 Q25 10 50 30 Q75 50 100 30' fill='none' stroke='%231e3a5f' stroke-width='0.5'/%3E%3Cpath d='M0 70 Q25 50 50 70 Q75 90 100 70' fill='none' stroke='%231e3a5f' stroke-width='0.5'/%3E%3C/svg%3E")`,
-        backgroundSize: '200px 200px',
-      }} />
-
-      {/* ===== MAIN CONTENT GRID ===== */}
-      <motion.div
-        style={{ opacity: contentOpacity }}
-        className="relative z-10 mx-auto max-w-7xl px-6 w-full lg:grid lg:grid-cols-12 lg:gap-8 lg:items-center lg:min-h-[100dvh]"
+      {/* Slides */}
+      <div
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Photos of the club and course"
+        className="absolute inset-0"
       >
-        {/* ===== LEFT: TEXT CONTENT ===== */}
-        <div className="lg:col-span-6 xl:col-span-5">
-          {/* Location Badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-navy-50 border border-navy-200 px-4 py-2 mb-6"
-          >
-            <MapPin size={14} className="text-navy-600" />
-            <span className="text-xs font-semibold text-navy-700 uppercase tracking-wider">
-              Sussex Inlet, NSW
-            </span>
-          </motion.div>
-
-          {/* Headline */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-navy-950 tracking-[-0.03em] leading-[0.9]"
-            >
-              Where
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[0.9]"
-            >
-              <span className="text-navy-600">Nature</span>
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold text-navy-950 tracking-[-0.03em] leading-[0.9]"
-            >
-              Meets the
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-6">
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[3.2rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[0.9]"
-            >
-              <span className="text-navy-800">
-                Fairway.
-              </span>
-            </motion.h1>
-          </div>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-lg sm:text-xl text-gray-500 font-light max-w-md leading-relaxed mb-8"
-          >
-            9 holes of pure Australian bushland golf.
-            <br className="hidden sm:block" />
-            Friendly club. Visitors always welcome.
-          </motion.p>
-
-          {/* CTA Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-3 mb-10 lg:mb-0"
-          >
-            <a
-              href="#contact"
-              className="btn-shimmer group inline-flex items-center justify-center gap-2 rounded-full bg-navy-600 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-navy-600/20 transition-all hover:bg-navy-700 hover:shadow-2xl hover:shadow-navy-600/30 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Book a Round
-              <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href="/map"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy-200 px-7 py-3.5 text-base font-semibold text-navy-800 transition-all hover:border-navy-400 hover:bg-navy-50"
-            >
-              Explore the Course
-            </a>
-          </motion.div>
-        </div>
-
-        {/* ===== RIGHT: EDITORIAL IMAGE COMPOSITION ===== */}
-        <div className="lg:col-span-6 xl:col-span-7 relative mt-10 lg:mt-0">
-          <div className="relative h-[420px] sm:h-[500px] lg:h-[600px] xl:h-[650px]">
-
-            {/* Primary Image — large, offset */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: 40 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              style={{ y: imageY }}
-              className="absolute top-0 right-0 w-[85%] sm:w-[80%] h-[75%] rounded-3xl overflow-hidden shadow-2xl shadow-navy-900/15 ring-1 ring-black/5"
+        {slides.map((slide, i) => {
+          const active = i === index;
+          // Under reduced motion the slideshow never advances, so only the first slide is needed.
+          if (i > 0 && (!restMounted || reducedMotion)) return null;
+          return (
+            <div
+              key={slide.src}
+              aria-hidden={!active}
+              className={`absolute inset-0 transition-opacity duration-[1200ms] ease-out motion-reduce:transition-none ${
+                active ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               <Image
-                src="/images/drone/DJI_0120.webp"
-                alt="Aerial view of Sussex Inlet Golf Club course"
+                src={slide.src}
+                alt={slide.alt}
                 fill
-                sizes="(max-width: 768px) 85vw, 45vw"
-                className="object-cover"
-                priority
+                sizes="100vw"
+                preload={i === 0 ? true : undefined}
+                loading={i === 0 ? undefined : 'lazy'}
+                className={`object-cover motion-safe:sm:transition-transform motion-safe:sm:duration-[6500ms] motion-safe:sm:ease-linear ${
+                  active ? 'motion-safe:sm:scale-[1.04]' : 'motion-safe:sm:scale-100'
+                }`}
               />
-              {/* Gradient overlay on image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/20 to-transparent" />
-            </motion.div>
-
-            {/* Secondary Image — smaller, overlapping bottom-left */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              style={{ y: image2Y }}
-              className="absolute bottom-0 left-0 w-[55%] sm:w-[50%] h-[50%] rounded-2xl overflow-hidden shadow-2xl shadow-navy-900/20 ring-1 ring-black/5 z-10"
-            >
-              <Image
-                src="/images/golfplaying.webp"
-                alt="People playing golf at Sussex Inlet"
-                fill
-                sizes="(max-width: 768px) 55vw, 30vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/20 to-transparent" />
-            </motion.div>
-
-            {/* ===== FLOATING STAT CARDS ===== */}
-
-            {/* Wildlife Card — floats bottom-right */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.3, duration: 0.5, type: 'spring', stiffness: 200 }}
-              className="absolute bottom-[15%] right-[-2%] sm:right-[2%] z-20 glass-badge rounded-2xl px-5 py-4 shadow-xl"
-            >
-              <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-navy-100 p-2.5">
-                  <TreePine size={20} className="text-navy-600" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-navy-900">Native Bushland</div>
-                  <div className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Wildlife on Course</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Weather Widget — bottom center */}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 hidden lg:block">
-              <WeatherWidget />
             </div>
+          );
+        })}
+        <div className="absolute inset-0 bg-navy-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/20 via-transparent to-navy-950/50" />
+      </div>
 
-            {/* Decorative accent — navy dot grid */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              className="absolute -bottom-12 right-[35%] w-24 h-24 hidden lg:block"
-              style={{
-                backgroundImage: 'radial-gradient(circle, #1e3a5f 1.5px, transparent 1.5px)',
-                backgroundSize: '12px 12px',
-                opacity: 0.2,
-              }}
-            />
+      {/* Required by WCAG 2.2.2 (pause moving content). Not dead code.
+          The button is visually hidden until it receives keyboard focus, so
+          sighted mouse users see no slideshow controls. Under reduced motion
+          the slideshow does not autoplay, so there is nothing to pause. */}
+      {reducedMotion ? null : (
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-pressed={paused}
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-20 focus:inline-flex focus:h-11 focus:items-center focus:bg-sand-50 focus:px-3 focus:text-sm focus:text-navy-950 focus:outline-2 focus:outline-offset-2 focus:outline-gold-300"
+        >
+          Pause slideshow
+        </button>
+      )}
 
-            {/* Decorative accent — gold ring */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.15, scale: 1 }}
-              transition={{ delay: 1.6, duration: 1, ease: 'easeOut' }}
-              className="absolute -top-6 right-[15%] w-32 h-32 rounded-full border-[3px] border-gold-400 hidden lg:block"
-            />
-          </div>
+      {/* Content */}
+      <motion.div
+        initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="relative z-10 mx-auto w-full max-w-3xl px-6 py-16 text-center sm:py-20 lg:py-24"
+      >
+        <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-sand-50 [text-wrap:balance] pb-1 sm:text-6xl lg:text-6xl xl:text-7xl">
+          Where nature meets the <em className="italic text-gold-300">fairway</em>
+        </h1>
+        <div aria-hidden="true" className="mx-auto mt-6 h-px w-12 bg-gold-400" />
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-sand-50/90">
+          Nine holes through native bushland at Sussex Inlet, on the NSW South Coast. Visitors
+          always welcome.
+        </p>
+        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href="tel:+61244412259"
+            className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap bg-gold-400 px-7 text-sm font-semibold text-navy-950 transition-colors duration-200 hover:bg-gold-300 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-300 sm:w-auto"
+          >
+            Book a round
+          </a>
+          <Link
+            href="/map"
+            className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap border border-sand-50/70 px-7 text-sm font-semibold text-sand-50 transition-colors duration-200 hover:border-sand-50 hover:bg-sand-50 hover:text-navy-950 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-300 sm:w-auto"
+          >
+            3D course map
+          </Link>
         </div>
       </motion.div>
-
-      {/* ===== BOTTOM ACCENT LINE ===== */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
     </section>
   );
 }

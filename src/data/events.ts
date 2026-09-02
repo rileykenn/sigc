@@ -5,16 +5,27 @@ export type CalendarEvent = {
   description?: string;
 };
 
-// Calendar category colors: muted, harmonised with the navy/gold/sand theme.
-// Color is a secondary cue only; every chip also carries the club's text label.
+// Calendar category tints, all from the club palette. Colour is a secondary
+// cue only; every chip also carries the club's text label.
 export const clubColors: Record<string, { bg: string; text: string; dot: string }> = {
-  AGU: { bg: 'bg-fairway-100', text: 'text-fairway-700', dot: 'bg-fairway-500' },
-  Vets: { bg: 'bg-sky-50', text: 'text-sky-800', dot: 'bg-sky-600' },
-  WGA: { bg: 'bg-rose-50', text: 'text-rose-800', dot: 'bg-rose-400' },
+  AGU: { bg: 'bg-fairway-100', text: 'text-fairway-800', dot: 'bg-fairway-500' },
+  Vets: { bg: 'bg-navy-100', text: 'text-navy-900', dot: 'bg-navy-700' },
+  WGA: { bg: 'bg-sand-200', text: 'text-navy-900', dot: 'bg-navy-500' },
   Gents: { bg: 'bg-navy-50', text: 'text-navy-800', dot: 'bg-navy-600' },
-  OHW: { bg: 'bg-teal-50', text: 'text-teal-800', dot: 'bg-teal-600' },
+  OHW: { bg: 'bg-fairway-200', text: 'text-fairway-800', dot: 'bg-fairway-600' },
   General: { bg: 'bg-sand-100', text: 'text-navy-700', dot: 'bg-navy-300' },
-  Sponsor: { bg: 'bg-gold-400/20', text: 'text-gold-600', dot: 'bg-gold-500' },
+  Sponsor: { bg: 'bg-gold-400/20', text: 'text-navy-900', dot: 'bg-gold-500' },
+};
+
+// Plain labels for the club codes, for the public site.
+export const clubLabels: Record<string, string> = {
+  AGU: "Men's",
+  Vets: 'Veterans',
+  WGA: 'Ladies',
+  Gents: 'Thursday gents',
+  OHW: 'One hit wonders',
+  General: 'Club',
+  Sponsor: 'Sponsor day',
 };
 
 // Events seeded from the 2026 Golf Programme PDF

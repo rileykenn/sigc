@@ -1,38 +1,51 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Calendar, 
-  CircleDollarSign, 
-  Settings, 
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  LayoutDashboard,
+  Calendar,
+  CircleDollarSign,
+  Users,
   LogOut,
   Menu,
-  X,
-  Map
+  X
 } from 'lucide-react';
 import Image from 'next/image';
 import { Toaster } from 'sonner';
+import { createClient } from '@/lib/supabase/client';
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Pricing & Rates', href: '/admin/pricing', icon: CircleDollarSign },
   { name: 'Events Calendar', href: '/admin/events', icon: Calendar },
-  { name: 'Course Guide', href: '/admin/course', icon: Map },
-  { name: 'Site Settings', href: '/admin/settings', icon: Settings },
+  { name: 'Member Applications', href: '/admin/members', icon: Users },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    createClient()
+      .auth.getUser()
+      .then(({ data }) => setEmail(data.user?.email ?? null));
+  }, []);
+
+  const handleSignOut = async () => {
+    await createClient().auth.signOut();
+    router.push('/login');
+    router.refresh();
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-40 bg-gray-900/80 backdrop-blur-sm md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
@@ -50,7 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Image src="/images/SIGC-crest.webp" alt="SIGC" width={40} height={40} className="object-contain" />
               <span className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">CMS</span>
             </Link>
-            <button 
+            <button
               className="md:hidden p-2 rounded-lg text-gray-400 hover:bg-gray-100"
               onClick={() => setSidebarOpen(false)}
             >
@@ -66,10 +79,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={() => setSidebarOpen(false)}
                   className={`
                     flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
-                    ${isActive 
-                      ? 'bg-fairway-50 text-fairway-700 shadow-sm ring-1 ring-fairway-100' 
+                    ${isActive
+                      ? 'bg-fairway-50 text-fairway-700 shadow-sm ring-1 ring-fairway-100'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
                   `}
                 >
@@ -84,20 +98,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="p-4 border-t border-gray-100">
             <div className="flex items-center gap-3 px-4 py-3 mb-2">
               <div className="h-10 w-10 rounded-full bg-fairway-100 flex items-center justify-center text-fairway-700 font-bold">
-                A
+                {(email?.[0] ?? 'A').toUpperCase()}
               </div>
               <div className="flex-1 overflow-hidden">
                 <p className="text-sm font-medium text-gray-900 truncate">Admin User</p>
-                <p className="text-xs text-gray-500 truncate">admin@sigolfclub.com.au</p>
+                <p className="text-xs text-gray-500 truncate">{email ?? 'Signed in'}</p>
               </div>
             </div>
-            <Link
-              href="/"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors w-full"
+            <button
+              onClick={handleSignOut}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors w-full cursor-pointer"
             >
               <LogOut size={20} className="text-red-500" />
               Sign out
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -106,7 +120,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Header (Mobile) */}
         <div className="md:hidden h-20 flex items-center px-6 bg-white border-b border-gray-100">
-          <button 
+          <button
             className="p-2 -ml-2 rounded-lg text-gray-500 hover:bg-gray-100"
             onClick={() => setSidebarOpen(true)}
           >

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sussex Inlet Golf Club",
     description:
-      "Where nature meets the fairway. 9 holes of pure Australian bushland golf. Social events, venue hire & visitors welcome.",
+      "Where nature meets the fairway. Nine holes through native bushland at Sussex Inlet, on the NSW South Coast. Visitors always welcome.",
     type: "website",
     locale: "en_AU",
   },
@@ -51,7 +51,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSans.variable} ${cormorant.variable} antialiased`}>
         {children}
-        <Toaster richColors position="bottom-right" />
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              borderRadius: 0,
+              background: '#0a1628',
+              color: '#faf9f7',
+              border: '1px solid rgba(250,249,247,0.2)',
+              boxShadow: 'none',
+            },
+          }}
+        />
       </body>
     </html>
   );

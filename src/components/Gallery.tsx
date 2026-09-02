@@ -1,70 +1,64 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const galleryImages = [
-  {
-    src: '/images/drone/DJI_0112.webp',
-    alt: 'Aerial view of the fairways winding through bushland',
-    aspect: 'aspect-[4/5]',
-  },
-  {
-    src: '/images/golfplaying.webp',
-    alt: 'A golfer mid swing on the course',
-    aspect: 'aspect-[4/3]',
-  },
-  {
-    src: '/images/morewildlife.webp',
-    alt: 'Kangaroos grazing beside the fairway',
-    aspect: 'aspect-square',
-  },
-  {
-    src: '/images/peopleplayinggolf.webp',
-    alt: 'A group of players walking the course together',
-    aspect: 'aspect-[3/4]',
-  },
-  {
-    src: '/images/drone/DJI_0127.webp',
-    alt: 'The course and surrounding bushland from above',
-    aspect: 'aspect-[16/10]',
-  },
-];
+export type GalleryImage = {
+  src: string;
+  alt: string;
+  /** Fixed aspect class, e.g. 'aspect-[4/3]'. Keeps the masonry stable while images load. */
+  aspect: string;
+  /** Optional caption rendered below the frame. */
+  caption?: string;
+};
 
-export default function Gallery() {
+type GalleryProps = {
+  title: string;
+  images: GalleryImage[];
+  /** How many images at the start of the list load eagerly (the rest are lazy). */
+  eagerCount?: number;
+  /** Paper band colour. Interior pages alternate white and sand-50. */
+  band?: 'white' | 'sand';
+  /** Optional closing sentence under the group. */
+  closingLine?: string;
+};
+
+// One titled group of framed photographs in masonry columns. Server component:
+// no motion, no lightbox, no hover zoom.
+export default function Gallery({
+  title,
+  images,
+  eagerCount = 0,
+  band = 'white',
+  closingLine,
+}: GalleryProps) {
   return (
-    <section id="gallery" className="bg-sand-50 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-navy-950 tracking-tight [text-wrap:balance] text-center mb-14"
-        >
-          Out on the course
-        </motion.h2>
+    <section className={`${band === 'sand' ? 'bg-sand-50' : 'bg-white'} py-16 sm:py-24`}>
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="font-display text-3xl font-semibold tracking-tight text-navy-950 [text-wrap:balance] sm:text-4xl">
+          {title}
+        </h2>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [&>*]:mb-4">
-          {galleryImages.map((img, i) => (
-            <motion.div
-              key={img.src}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: (i % 3) * 0.1, ease: 'easeOut' }}
-              className={`relative break-inside-avoid overflow-hidden rounded-2xl shadow-lg shadow-navy-900/5 ${img.aspect}`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 hover:scale-[1.03]"
-              />
-            </motion.div>
+        <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3">
+          {images.map((img, i) => (
+            <figure key={img.src} className="mb-6 break-inside-avoid">
+              <div className={`relative overflow-hidden border border-navy-950/10 ${img.aspect}`}>
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading={i < eagerCount ? 'eager' : 'lazy'}
+                  className="object-cover"
+                />
+              </div>
+              {img.caption && (
+                <figcaption className="mt-2 text-sm text-navy-900/70">{img.caption}</figcaption>
+              )}
+            </figure>
           ))}
         </div>
+
+        {closingLine && (
+          <p className="mt-4 max-w-[62ch] leading-relaxed text-navy-900/75">{closingLine}</p>
+        )}
       </div>
     </section>
   );

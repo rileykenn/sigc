@@ -6,12 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:radius": "grep -rn \"rounded-\" src/components \"src/app/(site)\" | grep -v rounded-none | grep -v src/components/map/ ; test $? -eq 1"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.109.0",
     "@types/three": "^0.185.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.9.0",

@@ -1,17 +1,28 @@
-import { Calendar, Users, CircleDollarSign, ArrowRight } from 'lucide-react';
+import { Calendar, Users, CircleDollarSign, ArrowRight, Database } from 'lucide-react';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/server';
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const supabase = await createClient();
+  const today = new Date().toISOString().slice(0, 10);
+
+  const [upcomingEvents, greenFees, cartHire, newApplications] = await Promise.all([
+    supabase.from('events').select('*', { count: 'exact', head: true }).gte('date', today),
+    supabase.from('green_fees').select('*', { count: 'exact', head: true }),
+    supabase.from('cart_hire').select('*', { count: 'exact', head: true }),
+    supabase.from('membership_applications').select('*', { count: 'exact', head: true }).eq('status', 'new'),
+  ]);
+
   const stats = [
-    { name: 'Upcoming Events', value: '14', icon: Calendar, color: 'bg-blue-50 text-blue-700 ring-blue-100' },
-    { name: 'Pricing Categories', value: '8', icon: CircleDollarSign, color: 'bg-green-50 text-green-700 ring-green-100' },
-    { name: 'Website Visitors (30d)', value: '2.4k', icon: Users, color: 'bg-purple-50 text-purple-700 ring-purple-100' },
+    { name: 'Upcoming Events', value: String(upcomingEvents.count ?? 0), icon: Calendar, color: 'bg-blue-50 text-blue-700 ring-blue-100' },
+    { name: 'Pricing Categories', value: String((greenFees.count ?? 0) + (cartHire.count ?? 0)), icon: CircleDollarSign, color: 'bg-green-50 text-green-700 ring-green-100' },
+    { name: 'New Applications', value: String(newApplications.count ?? 0), icon: Users, color: 'bg-purple-50 text-purple-700 ring-purple-100' },
   ];
 
   const quickLinks = [
     { name: 'Update Green Fees', href: '/admin/pricing', description: 'Modify 9 & 18 hole rates' },
     { name: 'Add Event', href: '/admin/events', description: 'Schedule a new competition' },
-    { name: 'Edit Hero Text', href: '/admin/settings', description: 'Change homepage headlines' },
+    { name: 'Review Applications', href: '/admin/members', description: 'View new membership sign-ups' },
   ];
 
   return (
@@ -44,8 +55,8 @@ export default function AdminDashboard() {
           </div>
           <div className="divide-y divide-gray-50">
             {quickLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 href={link.href}
                 className="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors group"
               >
@@ -61,14 +72,18 @@ export default function AdminDashboard() {
 
         {/* Info Panel */}
         <div className="bg-gradient-to-br from-fairway-800 to-fairway-950 rounded-2xl p-8 text-white shadow-xl">
-          <h3 className="text-xl font-bold mb-4">Mockup Notice</h3>
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Database size={20} />
+            Live Database
+          </h3>
           <p className="text-fairway-100 text-sm leading-relaxed mb-6">
-            This is a functional mockup of the Content Management System. You can navigate through the pages and see how the editing interface will look and feel. 
-            <br/><br/>
-            Currently, changes made here are <strong>not saved to a database</strong> and will not affect the live website. Once approved, this interface will be connected to Supabase for real-time updates.
+            This CMS is connected to the club&apos;s Supabase database. Changes you save here update the
+            live website immediately &mdash; the events calendar, green fees and cart hire rates shown to
+            visitors all come straight from this system, and membership applications submitted on the
+            website appear under Member Applications.
           </p>
           <div className="inline-block rounded-lg bg-white/10 backdrop-blur px-4 py-2 text-sm font-medium text-white border border-white/20">
-            Demo Mode Active
+            Connected &mdash; changes go live
           </div>
         </div>
       </div>
